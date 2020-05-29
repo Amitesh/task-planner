@@ -1,15 +1,37 @@
 {
-  data: [{
-          name: 'Todo',
-          tasks: [{name: 'task11'}, {name: 'task12'}]
-        },
-         {
-          name: 'Doing',
-          tasks: [{name: 'task21'}, {name: 'task22'}]
-         },
-         {
-          name: 'Done',
-          tasks: [{name: 'task31'}, {name: 'task32'}]
-         }
-        ]
+	"data": [
+		{
+			"name": "Todo",
+			"tasks": [
+				{
+					"name": "task11"
+				},
+				{
+					"name": "task12"
+				}
+			]
+		},
+		{
+			"name": "Doing",
+			"tasks": [
+				{
+					"name": "task21"
+				},
+				{
+					"name": "task22"
+				}
+			]
+		},
+		{
+			"name": "Done",
+			"tasks": [
+				{
+					"name": "task31"
+				},
+				{
+					"name": "task32"
+				}
+			]
+		}
+	]
 }
