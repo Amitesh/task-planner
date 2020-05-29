@@ -1,0 +1,13 @@
+<div class="task-planner">
+  <div class="header">Task Planner <a href="#" (click)="addList()">Add List</a></div>
+  <div class="task-board">
+    <div class="lists">
+      <div class="list" *ngFor="let tasklist of taskLists ">
+        <div>
+          {{tasklist.name}}
+        </div>
+       <task-list [tasks]="tasklist.tasks"></task-list>
+      </div>
+    </div>
+  </div>
+</div>

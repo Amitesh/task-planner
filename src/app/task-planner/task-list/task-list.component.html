@@ -1,0 +1,12 @@
+<div class="tasks">
+	<div class="sortable" 
+  [class.empty]="tasks.length === 0" 
+  [sortablejs]="tasks" 
+  [sortablejsOptions]="sortableOptions">
+		<div class="task" *ngFor="let task of tasks">
+			{{task.name}}
+			<span (click)="onDelete(task)" class="delete-icon">&times;</span>
+		</div>
+	</div>
+	<a href="#" (click)="addTask()">Add task</a>
+</div>

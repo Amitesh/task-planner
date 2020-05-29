@@ -1,0 +1,28 @@
+.task-planner{
+  margin: 10px 0;
+  background-color: #dfdfdf;
+
+  .header {
+    color: #222;
+  }
+
+  .task-board{
+    height: 50vh;
+    border-radius: 10rem;
+  }
+
+  .lists{
+    border: 1px solid red;
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .list{
+    border: 1px solid blue;
+    margin: 2px;
+    width: 25%;
+    min-width: 100px;
+    max-width: 300px;
+  }
+}

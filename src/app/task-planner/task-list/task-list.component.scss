@@ -1,0 +1,26 @@
+.delete-icon {
+  font-size: 1.25rem;
+  color: red;
+  cursor: pointer;
+}
+
+.task {
+  border: 1px solid #fafafa;
+  margin: 2px;
+}
+
+.sortable.empty::after{
+  content: "Empty";
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  color: #b7b7b7;
+ }
+ 
+
+
+.sortable {
+  background: #eee;
+  border-radius: 0.25rem;
+  min-height: 40px;
+}

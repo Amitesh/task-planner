@@ -1,0 +1,16 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close(false)">No</button>
+    <button type="button"
+      class="btn btn-outline-dark"
+      (click)="onDeleteClick()">Yes</button>
+  </div>
+</div>
