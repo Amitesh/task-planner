@@ -9,6 +9,7 @@ import { ConfirmDialogComponent } from "./dialogs/confirm-dialogs/confirm-dialog
 
 import { TaskPlannerComponent } from "./task-planner.component";
 import { TaskListComponent } from "./task-list/task-list.component";
+import { TaskListService } from "./sevices/task-list.service";
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TaskListComponent } from "./task-list/task-list.component";
     TaskListComponent,
     InputDialogComponent,
     ConfirmDialogComponent
-  ]
+  ],
+  providers: [TaskListService]
 })
 export class TaskPlannerModule {}

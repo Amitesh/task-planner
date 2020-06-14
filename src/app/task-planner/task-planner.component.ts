@@ -4,7 +4,7 @@ import { Task } from './modal/task';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputDialogComponent } from './dialogs/input-dialogs/input-dialog.component';
 import { TaskListService } from './sevices/task-list.service';
-
+import { ConfirmDialogComponent } from './dialogs/confirm-dialogs/confirm-dialog.component';
 
 @Component({
   selector: 'task-planner',
@@ -24,7 +24,7 @@ export class TaskPlannerComponent  {
   ngOnInit(){
     this.taskListService.get().subscribe( (taskLists) => {
       this.taskLists = taskLists;
-      console.log(this.taskLists);
+      // console.log(this.taskLists);
     });
     
     // let tasks: Array<Task> = [{name: 'task 1'}, {name: 'task 2'}];
@@ -51,4 +51,21 @@ export class TaskPlannerComponent  {
       this.taskLists.push({name: listName});
     })
   }
+
+  onDeleteTask(taskToDelete){
+    const dialogObj = this.dialogService.open(
+      ConfirmDialogComponent,
+      { backdrop: 'static' }
+      );
+    dialogObj.componentInstance.title = 'Delete list';
+    dialogObj.componentInstance.onDelete.subscribe((taskName) => {
+      console.log('delete call back task name =>', taskName);
+      // this.tasks.pop();
+      let index = this.taskLists.indexOf(taskToDelete);
+      console.log("taskToDelete =>", index);
+      this.taskLists.splice(index, 1);
+    });
+  }
+
+
 }

@@ -5,6 +5,7 @@ import { SortablejsOptions } from 'ngx-sortablejs';
 import { Task } from '../modal/task';
 import { InputDialogComponent } from '../dialogs/input-dialogs/input-dialog.component';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialogs/confirm-dialog.component';
+import { TaskListService } from '../sevices/task-list.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class TaskListComponent  {
     group: 'task-planner-group',
   };
 
-  constructor( public dialogService: NgbModal){
+  constructor( public dialogService: NgbModal, private TaskListService: TaskListService){
     // this.tasks = [];
   }
 
@@ -38,6 +39,9 @@ export class TaskListComponent  {
       console.log('call back task name=>', taskName);
       this.tasks.push({name: taskName});
     });
+
+    // API call
+    //  this.TaskListService.post(post).subscribe();
   }
 
   onDelete(taskToDelete){

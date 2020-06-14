@@ -7,12 +7,12 @@
   }
 
   .task-board{
-    height: 50vh;
-    border-radius: 10rem;
+    // height: 50vh;
+    // border-radius: 10rem;
   }
 
   .lists{
-    border: 1px solid red;
+    // border: 1px solid red;
     padding: 2px;
     display: flex;
     flex-direction: row;
@@ -22,7 +22,7 @@
     border: 1px solid blue;
     margin: 2px;
     width: 25%;
-    min-width: 100px;
+    min-width: 200px;
     max-width: 300px;
   }
 }

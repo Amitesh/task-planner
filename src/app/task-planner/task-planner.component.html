@@ -1,10 +1,19 @@
 <div class="task-planner">
-  <div class="header">Task Planner <a href="#" (click)="addList()">Add List</a></div>
+  <div class="header"> 
+    <div class="title">
+     <h3>Task Planner </h3></div>
+     <div class="add-list">  <a href="#" (click)="addList()">Add List</a></div> </div>
+
+  <!-- <div class="header">Task Planner <a href="#" (click)="addList()">Add List</a></div> -->
   <div class="task-board">
     <div class="lists">
       <div class="list" *ngFor="let tasklist of taskLists ">
-        <div>
-          {{tasklist.name}}
+        <div style="padding-right: 7px;">
+          <span tabindex="0" [attr.aria-label]="tasklist.name">
+            <h5 style="display: inline-block;">{{tasklist.name}}</h5></span>
+          <a href="#"  class="delete-icon"  (click)="onDeleteTask(tasklist)">
+             <i class="fas fa-trash danger"></i>
+            </a> 
         </div>
        <task-list [tasks]="tasklist.tasks"></task-list>
       </div>
