@@ -12,26 +12,27 @@ const httpOptions = {
 
 @Injectable()
 export class TaskListService {
-  private taskListUrl: string ='https://my-json-server.typicode.com/Amitesh/task-planner/data?12';
+  // private taskListUrl: string ='https://my-json-server.typicode.com/Amitesh/task-planner/data?12';
+  private taskListUrl: string ='http://localhost:3000/tasks-list';
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  // getPost(id: number): Observable<PostModel> {
-  //   return this.http.get<PostModel>(`${this.postsUrl}/${id}`)
-  // }
-
   get(): Observable<TaskList[]> {
     return this.http.get<TaskList[]>(`${this.taskListUrl}`)
   }
 
-  post(taskList: TaskList): Observable<TaskList> {
-    return this.http.post<TaskList>(this.taskListUrl, taskList, httpOptions) 
+  post(taskList: TaskList): Observable<TaskList[]> {
+    return this.http.post<TaskList[]>(this.taskListUrl, taskList, httpOptions) 
   }
 
-  put(taskLists: TaskList[]): Observable<TaskList[]> {
-    return this.http.put<TaskList[]>(this.taskListUrl, taskLists, httpOptions) 
+  put(taskList: TaskList): Observable<TaskList[]> {
+    return this.http.put<TaskList[]>(this.taskListUrl, taskList, httpOptions) 
+  }
+
+  delete(taskList: TaskList): Observable<TaskList[]> {
+    return this.http.delete<TaskList[]>(`${this.taskListUrl}\\${taskList._id}`, httpOptions) 
   }
 
 }

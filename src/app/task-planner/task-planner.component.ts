@@ -24,14 +24,7 @@ export class TaskPlannerComponent  {
   ngOnInit(){
     this.taskListService.get().subscribe( (taskLists) => {
       this.taskLists = taskLists;
-      // console.log(this.taskLists);
     });
-    
-    // let tasks: Array<Task> = [{name: 'task 1'}, {name: 'task 2'}];
-
-    // this.taskLists.push({name: 'Todo', tasks: [...tasks]});
-    // this.taskLists.push({name: 'Doing', tasks: [...tasks]});
-    // this.taskLists.push({name: 'Done', tasks: [...tasks]});
   }
 
   addList() {
@@ -39,16 +32,12 @@ export class TaskPlannerComponent  {
       InputDialogComponent,
       { backdrop: 'static' }
       );
-    dialogObj.componentInstance.title = 'Add new list';
-    dialogObj.result.then((result) => {
-      if (result) {
-        console.log('in result =>', result);
-      }
-    });
 
-    dialogObj.componentInstance.onSubmit.subscribe((listName) => {
-      console.log('call back =>', listName);
-      this.taskLists.push({name: listName});
+    dialogObj.componentInstance.title = 'Add new list';
+    dialogObj.componentInstance.onSubmit.subscribe((listName: string) => {
+      this.taskListService.post({name: listName}).subscribe((taskLists) => {
+        this.taskLists = taskLists;
+      });
     })
   }
 
@@ -58,14 +47,12 @@ export class TaskPlannerComponent  {
       { backdrop: 'static' }
       );
     dialogObj.componentInstance.title = 'Delete list';
-    dialogObj.componentInstance.onDelete.subscribe((taskName) => {
-      console.log('delete call back task name =>', taskName);
-      // this.tasks.pop();
-      let index = this.taskLists.indexOf(taskToDelete);
-      console.log("taskToDelete =>", index);
-      this.taskLists.splice(index, 1);
+    dialogObj.componentInstance.onDelete.subscribe((deleteList) => {
+      if( deleteList ){
+        this.taskListService.delete(taskToDelete).subscribe((taskLists) => {
+          this.taskLists = taskLists;
+        });
+      }
     });
   }
-
-
 }
