@@ -20,3 +20,11 @@
   border-radius: 0.25rem;
   min-height: 40px;
 }
+.card{
+  .delete-icon {
+    display: none;
+  }
+  &:hover .delete-icon {
+    display: block;
+  }
+}

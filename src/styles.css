@@ -4,10 +4,13 @@
 .delete-icon {
     /* font-size: 1.25rem; */
     float: right;
-    color: red;
+    color: #c3c3c3;
     cursor: pointer;
     margin-left: 2rem;
     text-decoration: none !important;
+}
+.delete-icon:hover {
+    color: #f95454;
 }
 
 /* design */

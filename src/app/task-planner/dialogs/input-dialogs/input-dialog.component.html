@@ -5,7 +5,7 @@
   <div class="modal-body">
     <p>Name</p>
     <input [formControl]="input" type="text" (keydown.enter)="input.valid && onCreate()">
-    <p [class.red]="input.invalid" *ngIf="input.invalid">Input can't be blank.</p>
+    <p class="small" [class.text-danger]="input.invalid && input.dirty" *ngIf="input.invalid && input.dirty">Input can't be blank.</p>
 
   </div>
   <div class="modal-footer">

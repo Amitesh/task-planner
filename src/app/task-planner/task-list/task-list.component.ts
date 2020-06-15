@@ -16,9 +16,18 @@ import { TaskService } from "../sevices/task.service";
 export class TaskListComponent {
   @Input() taskList: TaskList;
   tasks: Task[];
-
+  
   sortableOptions: SortablejsOptions = {
     group: "task-planner-group",
+    // onUpdate: (event: any) => {
+    //   console.log('in update');
+    // },
+    onAdd: (event: any) => {this.onAddTaskByDragAndDrop(event)},
+    onRemove: (event: any) => {this.onRemoveTaskByDragAndDrop(event)},
+    // onEnd: (event: any) => {
+    //   console.log('in end', event, this.taskList.name);
+    //   console.log('to =>', event.to);
+    // }
   };
 
   constructor(
@@ -28,6 +37,38 @@ export class TaskListComponent {
 
   ngOnInit() {
     this.tasks = this.taskList.tasks || [];
+  }
+  onAddTaskByDragAndDrop(event: any){
+    let toTaskListId = this.taskList._id;
+    let task = this.taskList.tasks[event.newIndex];
+
+    console.log('Add =>', toTaskListId, task);
+
+    this.taskService
+        .post(toTaskListId, task)
+        .subscribe((taskList) => {
+          console.log('task has been added.');
+        });
+
+    // console.log('in add', event, this.taskList.name, this.taskList._id, this.taskList.tasks[event.newIndex]);
+    // console.log("from =>", event.from, event.item);
+  }
+
+  onRemoveTaskByDragAndDrop(event: any){
+    let fromTaskListId = this.taskList._id;
+    let taskId = event.item.getAttribute('data-id');
+
+    console.log('Remove =>', fromTaskListId, taskId);
+
+    this.taskService
+          .delete(fromTaskListId, {_id: taskId, name: null})
+          .subscribe((taskList) => {
+            console.log('task has been deleted');
+          });
+
+
+    // console.log('in remove', event, this.taskList.name, this.taskList._id, this.taskList.tasks);
+    // console.log("from =>", event.from, event.item, event.item.getAttribute('data-id'));
   }
 
   addTask() {
