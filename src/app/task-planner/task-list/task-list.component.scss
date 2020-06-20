@@ -1,29 +1,62 @@
- 
+$white: #fff;
+$color_botticelli: #ccdce6;
+$color_silver: #c3c3c3;
+$color_royal_blue: #3a80de;
+$color_nobel: #b7b7b7;
+$color_gallery: #eee;
+$alabaster: #fafafa;
 
 .task {
-  border: 1px solid #fafafa;
+  border: 1px solid $alabaster;
   margin: 2px;
 }
 
-.sortable.empty::after{
-  content: "Empty";
-  text-align: center;
-  vertical-align: middle;
-  line-height: 30px;
-  color: #b7b7b7;
- }
- 
-
-
 .sortable {
-  background: #eee;
+  background: $color_gallery;
   border-radius: 0.25rem;
   min-height: 40px;
-}
-.card{
-  .delete-icon {
-    display: none;
+
+  &.empty::after {
+    content: "Empty";
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    color: $color_nobel;
   }
+}
+
+.card {
+  background-color: $color_botticelli;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  min-height: 33px;
+  position: relative;
+  overflow: hidden;
+
+  .card-content {
+    background-color: $white;
+    padding: 6px 8px;
+	min-height: 33px;
+
+	.truncate{
+		max-width: 85%;
+		display: inline-block
+	}
+  }
+
+  .delete-icon {
+    float: right;
+    color: $color_silver;
+    cursor: pointer;
+    text-decoration: none;
+    display: none;
+
+    &:hover {
+      color: $color_royal_blue;
+    }
+  }
+
   &:hover .delete-icon {
     display: block;
   }

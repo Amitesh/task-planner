@@ -27,12 +27,12 @@ it('should create the app', async(() => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it("verify if input is valid", () => {
-    spyOn(component, "isFilterValid").and.returnValue(true);
-    expect(component.isFilterValid).toBeTruthy();
-    // expect(component.isFilterValid).toBeFalsy(); // false
-    // 
-    // component.onCreate();
-  });
+  // it("verify if input is valid", () => {
+  //   spyOn(component, "isFilterValid").and.returnValue(true);
+  //   expect(component.isFilterValid).toBeTruthy();
+  //   // expect(component.isFilterValid).toBeFalsy(); // false
+  //   // 
+  //   // component.onCreate();
+  // });
  
 });

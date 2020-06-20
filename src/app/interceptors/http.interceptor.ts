@@ -15,7 +15,7 @@ import 'rxjs/add/observable/throw';
 import { catchError, map, tap, finalize } from 'rxjs/operators';
 
 @Injectable()
-export class MyHttpInterceptor implements HttpInterceptor {
+export class AppHttpInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
      const customReq = request.clone({
       headers: request.headers.set('app-author', 'test')

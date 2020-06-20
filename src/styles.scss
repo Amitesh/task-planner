@@ -1,0 +1,23 @@
+/* Add application styles & imports to this file! */
+/* @import '~font-awesome/css/font-awesome.css'; */
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
+@import "https://use.fontawesome.com/releases/v5.6.3/css/all.css";
+
+.clearfix:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+body{
+  background-image: url(assets/images/wood.png);
+  background-repeat: repeat;
+  background-position: center;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

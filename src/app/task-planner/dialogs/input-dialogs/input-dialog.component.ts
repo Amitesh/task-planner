@@ -25,11 +25,11 @@ export class InputDialogComponent {
     this.activeModal.close();
   }
 
-  // test case
+  // // test case
 
-  isFilterValid() {
-    return true;
-  }
+  // isFilterValid() {
+  //   return true;
+  // }
 
   
 }

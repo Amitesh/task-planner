@@ -11,7 +11,6 @@ import { TaskPlannerComponent } from "./task-planner.component";
 import { TaskListComponent } from "./task-list/task-list.component";
 import { TaskListService } from "./sevices/task-list.service";
 
-
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, NgbModule, SortablejsModule],
   exports: [TaskPlannerComponent, TaskListComponent],
@@ -19,8 +18,8 @@ import { TaskListService } from "./sevices/task-list.service";
     TaskPlannerComponent,
     TaskListComponent,
     InputDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
-  providers: [TaskListService]
+  providers: [TaskListService],
 })
 export class TaskPlannerModule {}

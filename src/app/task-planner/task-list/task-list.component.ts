@@ -15,19 +15,16 @@ import { TaskService } from "../sevices/task.service";
 })
 export class TaskListComponent {
   @Input() taskList: TaskList;
-  tasks: Task[];
-  
-  sortableOptions: SortablejsOptions = {
+  private tasks: Task[];
+
+  private sortableOptions: SortablejsOptions = {
     group: "task-planner-group",
-    // onUpdate: (event: any) => {
-    //   console.log('in update');
-    // },
-    onAdd: (event: any) => {this.onAddTaskByDragAndDrop(event)},
-    onRemove: (event: any) => {this.onRemoveTaskByDragAndDrop(event)},
-    // onEnd: (event: any) => {
-    //   console.log('in end', event, this.taskList.name);
-    //   console.log('to =>', event.to);
-    // }
+    onAdd: (event: any) => {
+      this.onAddTaskByDragAndDrop(event);
+    },
+    onRemove: (event: any) => {
+      this.onRemoveTaskByDragAndDrop(event);
+    },
   };
 
   constructor(
@@ -38,54 +35,52 @@ export class TaskListComponent {
   ngOnInit() {
     this.tasks = this.taskList.tasks || [];
   }
-  onAddTaskByDragAndDrop(event: any){
-    let toTaskListId = this.taskList._id;
-    let task = this.taskList.tasks[event.newIndex];
 
-    console.log('Add =>', toTaskListId, task);
-
-    this.taskService
+  onAddTaskByDragAndDrop(event: any) {
+    let toTaskListId: string;
+    let task: Task;
+    try {
+      toTaskListId = this.taskList._id;
+      task = this.tasks[event.newIndex];
+      this.taskService
         .post(toTaskListId, task)
-        .subscribe((taskList) => {
-          console.log('task has been added.');
-        });
-
-    // console.log('in add', event, this.taskList.name, this.taskList._id, this.taskList.tasks[event.newIndex]);
-    // console.log("from =>", event.from, event.item);
+        .subscribe((taskList: TaskList) => {});
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  onRemoveTaskByDragAndDrop(event: any){
-    let fromTaskListId = this.taskList._id;
-    let taskId = event.item.getAttribute('data-id');
+  onRemoveTaskByDragAndDrop(event: any) {
+    let fromTaskListId: string;
+    let taskId: string;
+    try {
+      fromTaskListId = this.taskList._id;
+      taskId = event.item.getAttribute("data-id");
 
-    console.log('Remove =>', fromTaskListId, taskId);
-
-    this.taskService
-          .delete(fromTaskListId, {_id: taskId, name: null})
-          .subscribe((taskList) => {
-            console.log('task has been deleted');
-          });
-
-
-    // console.log('in remove', event, this.taskList.name, this.taskList._id, this.taskList.tasks);
-    // console.log("from =>", event.from, event.item, event.item.getAttribute('data-id'));
+      this.taskService
+        .delete(fromTaskListId, { _id: taskId, name: null })
+        .subscribe((taskList: TaskList) => {});
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   addTask() {
-    // this.tasks.push({name: 'naya task'});
     const dialogObj = this.dialogService.open(InputDialogComponent, {
       backdrop: "static",
     });
     dialogObj.componentInstance.title = "Add new task";
-    dialogObj.componentInstance.onSubmit.subscribe((taskName) => {
-      console.log("call back task name=>", taskName);
-      // this.tasks.push({name: taskName});
-      this.taskService
-        .post(this.taskList._id, { name: taskName })
-        .subscribe((taskList) => {
-          this.taskList = taskList;
-          this.tasks = this.taskList.tasks;
-        });
+    dialogObj.componentInstance.onSubmit.subscribe((taskName: string) => {
+      try {
+        this.taskService
+          .post(this.taskList._id, { name: taskName })
+          .subscribe((taskList) => {
+            this.taskList = taskList;
+            this.tasks = this.taskList.tasks;
+          });
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 
@@ -94,15 +89,18 @@ export class TaskListComponent {
       backdrop: "static",
     });
     dialogObj.componentInstance.title = "Delete task";
-    dialogObj.componentInstance.onDelete.subscribe((deleteTask) => {
-      console.log("delete call back task name =>", taskToDelete.name);
-      if (deleteTask) {
-        this.taskService
-          .delete(this.taskList._id, taskToDelete)
-          .subscribe((taskList) => {
-            this.taskList = taskList;
-            this.tasks = this.taskList.tasks;
-          });
+    dialogObj.componentInstance.onDelete.subscribe((deleteTask: boolean) => {
+      try {
+        if (deleteTask) {
+          this.taskService
+            .delete(this.taskList._id, taskToDelete)
+            .subscribe((taskList) => {
+              this.taskList = taskList;
+              this.tasks = this.taskList.tasks;
+            });
+        }
+      } catch (error) {
+        console.error(error);
       }
     });
   }
