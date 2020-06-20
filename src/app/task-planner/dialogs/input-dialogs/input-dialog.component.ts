@@ -1,17 +1,23 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "input-dialog",
   templateUrl: "./input-dialog.component.html",
-  styleUrls:["input-dialog.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ["input-dialog.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDialogComponent {
   @Input() public title: string;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
-	
+
   set initialValue(value: string) {
     this.input.setValue(value);
   }
@@ -30,6 +36,4 @@ export class InputDialogComponent {
   // isFilterValid() {
   //   return true;
   // }
-
-  
 }

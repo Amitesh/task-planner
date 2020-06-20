@@ -37,12 +37,12 @@ $alabaster: #fafafa;
   .card-content {
     background-color: $white;
     padding: 6px 8px;
-	min-height: 33px;
+    min-height: 33px;
 
-	.truncate{
-		max-width: 85%;
-		display: inline-block
-	}
+    .truncate {
+      max-width: 85%;
+      display: inline-block;
+    }
   }
 
   .delete-icon {

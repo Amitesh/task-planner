@@ -3,10 +3,10 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SortablejsOptions } from "ngx-sortablejs";
 
 import { Task } from "../modal/task";
-import { InputDialogComponent } from "../dialogs/input-dialogs/input-dialog.component";
-import { ConfirmDialogComponent } from "../dialogs/confirm-dialogs/confirm-dialog.component";
 import { TaskList } from "../modal/task-list";
 import { TaskService } from "../sevices/task.service";
+import { InputDialogComponent } from "../dialogs/input-dialogs/input-dialog.component";
+import { ConfirmDialogComponent } from "../dialogs/confirm-dialogs/confirm-dialog.component";
 
 @Component({
   selector: "task-list",
@@ -84,7 +84,7 @@ export class TaskListComponent {
     });
   }
 
-  onDelete(taskToDelete) {
+  onDelete(taskToDelete: Task) {
     const dialogObj = this.dialogService.open(ConfirmDialogComponent, {
       backdrop: "static",
     });
@@ -94,7 +94,7 @@ export class TaskListComponent {
         if (deleteTask) {
           this.taskService
             .delete(this.taskList._id, taskToDelete)
-            .subscribe((taskList) => {
+            .subscribe((taskList: TaskList) => {
               this.taskList = taskList;
               this.tasks = this.taskList.tasks;
             });

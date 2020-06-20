@@ -9,7 +9,9 @@
       <div class="list" *ngFor="let tasklist of taskLists">
         <div class="clearfix">
           <span tabindex="0" [attr.aria-label]="tasklist.name">
-            <h5>{{ tasklist.name }}</h5>
+            <h5 class="truncate" title="{{ tasklist.name }}">
+              {{ tasklist.name }}
+            </h5>
           </span>
           <a href="#" class="delete-icon" (click)="onDeleteTaskList(tasklist)">
             <i class="fas fa-trash danger"></i>
