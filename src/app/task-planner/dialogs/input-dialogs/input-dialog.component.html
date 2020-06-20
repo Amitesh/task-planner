@@ -7,7 +7,6 @@
     <input [formControl]="input" type="text" (keydown.enter)="input.valid && onCreate()">
     <p class="small" [class.text-danger]="input.invalid && input.dirty" *ngIf="input.invalid && input.dirty">Input can't
       be blank.</p>
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Cancel</button>

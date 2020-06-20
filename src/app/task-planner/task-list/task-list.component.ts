@@ -8,15 +8,22 @@ import { TaskService } from "../sevices/task.service";
 import { InputDialogComponent } from "../dialogs/input-dialogs/input-dialog.component";
 import { ConfirmDialogComponent } from "../dialogs/confirm-dialogs/confirm-dialog.component";
 
+/**
+ * Task component to render the individual task
+ */
 @Component({
   selector: "task-list",
   templateUrl: "./task-list.component.html",
   styleUrls: ["./task-list.component.scss"],
 })
 export class TaskListComponent {
+  // Task list to hold the all tasks and it's properties
   @Input() taskList: TaskList;
   private tasks: Task[];
 
+  /**
+   * Set Sortablejs configuration for group name and callbacks
+   */
   private sortableOptions: SortablejsOptions = {
     group: "task-planner-group",
     onAdd: (event: any) => {
@@ -36,6 +43,10 @@ export class TaskListComponent {
     this.tasks = this.taskList.tasks || [];
   }
 
+  /**
+   * Method to call on adding a task from one list to other list.
+   * @param event 
+   */
   onAddTaskByDragAndDrop(event: any) {
     let toTaskListId: string;
     let task: Task;
@@ -49,7 +60,11 @@ export class TaskListComponent {
       console.error(error);
     }
   }
-
+  
+  /**
+   * Method to call on removing a task from one list to other list.
+   * @param event 
+   */
   onRemoveTaskByDragAndDrop(event: any) {
     let fromTaskListId: string;
     let taskId: string;
@@ -65,6 +80,9 @@ export class TaskListComponent {
     }
   }
 
+  /**
+   * Open a popup to add a new task to selected task list.
+   */
   addTask() {
     const dialogObj = this.dialogService.open(InputDialogComponent, {
       backdrop: "static",
@@ -84,6 +102,10 @@ export class TaskListComponent {
     });
   }
 
+  /**
+   * Open a confirmation popup to delete the selected task
+   * @param taskToDelete 
+   */
   onDelete(taskToDelete: Task) {
     const dialogObj = this.dialogService.open(ConfirmDialogComponent, {
       backdrop: "static",

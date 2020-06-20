@@ -2,17 +2,12 @@ import { Injectable } from "@angular/core";
 import {
   HttpInterceptor,
   HttpRequest,
-  HttpResponse,
   HttpErrorResponse,
   HttpHandler,
-  HttpHeaders,
   HttpEvent,
 } from "@angular/common/http";
 
 import { Observable, throwError } from "rxjs";
-// import "rxjs/add/operator/do";
-// import "rxjs/add/operator/catch";
-// import "rxjs/add/observable/throw";
 import { catchError, retry } from "rxjs/operators";
 
 @Injectable()
@@ -22,6 +17,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let authorizedRequest: HttpRequest<any>;
+
+    // Add header key-values to each request
     authorizedRequest = request.clone({
       headers: request.headers.set("Authorization", "Bearer token"),
     });
@@ -35,8 +32,13 @@ export class AppHttpInterceptor implements HttpInterceptor {
     authorizedRequest = authorizedRequest.clone({
       headers: authorizedRequest.headers.set("Accept", "application/json"),
     });
-
+    /*
+     * Handle the error status code and messages at common place.
+     * Use dialog or toaster to show the messages .
+     * Use status code to design the error logging for server or for user.
+     */
     return next.handle(authorizedRequest).pipe(
+      // Give a one more retry for slower devices
        retry(1),
        catchError((error: HttpErrorResponse) => {
          let errorMessage = '';

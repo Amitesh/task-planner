@@ -6,6 +6,9 @@ import { InputDialogComponent } from "./dialogs/input-dialogs/input-dialog.compo
 import { TaskListService } from "./sevices/task-list.service";
 import { ConfirmDialogComponent } from "./dialogs/confirm-dialogs/confirm-dialog.component";
 
+/**
+ * Task list component to render the each task list and it's task inside it.
+ */
 @Component({
   selector: "task-planner",
   templateUrl: "./task-planner.component.html",
@@ -23,11 +26,15 @@ export class TaskPlannerComponent {
   }
 
   ngOnInit() {
+    // fetch the all task lists from the server
     this.taskListService.get().subscribe((taskLists: TaskList[]) => {
       this.taskLists = taskLists;
     });
   }
 
+  /**
+   * Open a popup to add a new task list
+   */
   addList() {
     const dialogObj = this.dialogService.open(InputDialogComponent, {
       backdrop: "static",
@@ -43,6 +50,10 @@ export class TaskPlannerComponent {
     });
   }
 
+  /**
+   * Open the confirmation poup to delete a task list along with it's task
+   * @param taskListToDelete 
+   */
   onDeleteTaskList(taskListToDelete: TaskList) {
     const dialogObj = this.dialogService.open(ConfirmDialogComponent, {
       backdrop: "static",

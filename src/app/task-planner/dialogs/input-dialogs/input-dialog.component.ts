@@ -8,6 +8,9 @@ import {
 import { FormControl, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
+/**
+ * Component to get the user input for adding new tasklist or task
+ */
 @Component({
   selector: "input-dialog",
   templateUrl: "./input-dialog.component.html",
@@ -26,6 +29,9 @@ export class InputDialogComponent {
 
   constructor(public activeModal: NgbActiveModal) {}
 
+  /**
+   * Method to create the taskList or task
+   */
   onCreate() {
     this.onSubmit.emit(this.input.value);
     this.activeModal.close();

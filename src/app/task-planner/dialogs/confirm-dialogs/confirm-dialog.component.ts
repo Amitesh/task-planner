@@ -7,6 +7,9 @@ import {
 } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
+/**
+ * Component to get the user confirmation before deteling a tasklist or task.
+ */
 @Component({
   selector: "confirm-dialog",
   templateUrl: "confirm-dialog.component.html",
@@ -19,6 +22,9 @@ export class ConfirmDialogComponent {
 
   constructor(public activeModal: NgbActiveModal) {}
 
+  /**
+   * Method to handle the click for `Yes` action
+   */
   onDeleteClick() {
     this.onDelete.emit(true);
     this.activeModal.close();

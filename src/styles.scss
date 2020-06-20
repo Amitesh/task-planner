@@ -2,6 +2,7 @@
 @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
 @import "https://use.fontawesome.com/releases/v5.6.3/css/all.css";
 
+/* Application wide styles */
 .clearfix:after {
   content: ".";
   visibility: hidden;
@@ -15,6 +16,7 @@ body{
   background-position: center;
 }
 
+// Add ellipsis
 .truncate {
   white-space: nowrap;
   overflow: hidden;
