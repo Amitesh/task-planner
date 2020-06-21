@@ -1,11 +1,11 @@
 <div class="task-planner">
   <div class="header">
-    <h3 class="title">Task Planner</h3>
+    <h3 class="title"><i class="fas fa-tasks"></i> Task Planner</h3>
     <a href="#" class="add-list" (click)="addList()">Add List</a>
   </div>
 
   <div class="task-board clearfix">
-    <div class="lists">
+    <div class="lists" [class.empty]="taskLists.length === 0">
       <div class="list" *ngFor="let tasklist of taskLists">
         <div class="clearfix">
           <span tabindex="0" [attr.aria-label]="tasklist.name">
@@ -19,6 +19,19 @@
         </div>
         <task-list [taskList]="tasklist"></task-list>
       </div>
+      <div class="empty-tasklist">
+        <h4>Welcome to your task planner board! <i class="fas fa-rocket"></i></h4>
+        To add new task list click 'Add list' link above.
+      </div>
     </div>
+  </div>
+  <div class="hints" *ngIf="taskLists.length !== 0">
+    <h6>Hints</h6>
+    <ul>
+      <li>Empty task list and task name is not allowed.</li>
+      <li>Duplicate task list and task name is allowed.</li>
+      <li>Task order is not maintained yet.</li>
+      <li>Drop the task in highlighted drop zone area between <br>Task list name and Add task link.</li>
+    </ul>
   </div>
 </div>

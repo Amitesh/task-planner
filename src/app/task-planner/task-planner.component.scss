@@ -86,3 +86,22 @@ a.add-list {
   color: $white;
   margin-left: 32px;
 }
+
+.lists .empty-tasklist{
+  display: none;
+  margin: 20px 0px;
+}
+.lists.empty .empty-tasklist{
+  display: block;
+}
+
+.hints{
+  background-color: #0c0c0c3b;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 20%;
+  h6, li{
+    font-size: 0.8rem;
+  }
+}

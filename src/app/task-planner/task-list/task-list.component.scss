@@ -17,11 +17,14 @@ $alabaster: #fafafa;
   min-height: 40px;
 
   &.empty::after {
-    content: "Empty";
+    content: "Add or drop task here";
     text-align: center;
     vertical-align: middle;
     line-height: 30px;
     color: $color_nobel;
+  }
+  &:hover{
+    background-color: #dedddd;
   }
 }
 
