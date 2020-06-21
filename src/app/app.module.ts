@@ -4,7 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { AppHttpInterceptor } from "./interceptors/http.interceptor";
+import { AppHttpInterceptor } from "./interceptors/app-http.interceptor";
 import { AppComponent } from "./app.component";
 import { TaskListService } from "./task-planner/sevices/task-list.service";
 import { TaskPlannerModule } from "./task-planner/task-planner.module";

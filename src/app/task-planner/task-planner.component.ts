@@ -40,7 +40,7 @@ export class TaskPlannerComponent {
       backdrop: "static",
     });
 
-    dialogObj.componentInstance.title = "Add new list";
+    dialogObj.componentInstance.title = "Add new task list";
     dialogObj.componentInstance.onSubmit.subscribe((listName: string) => {
       this.taskListService
         .post({ name: listName })
@@ -58,7 +58,7 @@ export class TaskPlannerComponent {
     const dialogObj = this.dialogService.open(ConfirmDialogComponent, {
       backdrop: "static",
     });
-    dialogObj.componentInstance.title = "Delete list";
+    dialogObj.componentInstance.title = "Delete task list";
     dialogObj.componentInstance.onDelete.subscribe((deleteList: boolean) => {
       if (deleteList) {
         this.taskListService

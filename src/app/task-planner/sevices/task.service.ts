@@ -18,6 +18,7 @@ const httpOptions = {
 export class TaskService {
   // TaskList resource api end point. It can be put in a constant config file.
   private taskListUrl: string = "http://localhost:3000/tasks-list";
+  // private taskListUrl: string = "/tasks-list";
 
   constructor(private http: HttpClient) {}
 

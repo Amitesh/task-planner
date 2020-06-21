@@ -21,13 +21,16 @@ export class InputDialogComponent {
   @Input() public title: string;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
+  input = new FormControl("", [
+    Validators.required,
+    Validators.pattern(/([\S]+[\s]*)*[\S]+/), // Accept non-whitespace text on both ends
+  ]);
+
+  constructor(public activeModal: NgbActiveModal) {}
+
   set initialValue(value: string) {
     this.input.setValue(value);
   }
-
-  input = new FormControl("", Validators.required);
-
-  constructor(public activeModal: NgbActiveModal) {}
 
   /**
    * Method to create the taskList or task

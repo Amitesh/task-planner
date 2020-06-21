@@ -231,7 +231,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div>\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title\">{{title}}</h4>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <p>Are you sure?</p>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\"\r\n      class=\"btn btn-outline-dark\"\r\n      (click)=\"activeModal.close(false)\">No</button>\r\n    <button type=\"button\"\r\n      class=\"btn btn-outline-dark\"\r\n      (click)=\"onDeleteClick()\">Yes</button>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div>\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title\">{{title}}</h4>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <p>Are you sure?</p>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"activeModal.close(false)\">No</button>\r\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"onDeleteClick()\">Yes</button>\r\n  </div>\r\n</div>");
 
 /***/ }),
 
@@ -244,7 +244,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div>\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title\">{{title}}</h4>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <p>Name</p>\r\n    <input [formControl]=\"input\" type=\"text\" (keydown.enter)=\"input.valid && onCreate()\">\r\n    <p class=\"small\" [class.text-danger]=\"input.invalid && input.dirty\" *ngIf=\"input.invalid && input.dirty\">Input can't be blank.</p>\r\n\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\"\r\n      class=\"btn btn-outline-dark\"\r\n      (click)=\"activeModal.close()\">Cancel</button>\r\n    <button type=\"button\"\r\n      class=\"btn\"\r\n      [class.btn-outline-dark]=\"input.invalid\"\r\n      [class.btn-primary]=\"input.valid\"\r\n      [class.disabled]=\"input.invalid\"\r\n      [disabled]=\"input.invalid\"\r\n      (click)=\"onCreate()\">OK</button>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div>\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title\">{{title}}</h4>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <p>Name</p>\r\n    <input [formControl]=\"input\" type=\"text\" (keydown.enter)=\"input.valid && onCreate()\">\r\n    <p class=\"small\" [class.text-danger]=\"input.invalid && input.dirty\" *ngIf=\"input.invalid && input.dirty\">Input can't\r\n      be blank.</p>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"activeModal.close()\">Cancel</button>\r\n    <button type=\"button\" class=\"btn\" [class.btn-outline-dark]=\"input.invalid\" [class.btn-primary]=\"input.valid\"\r\n      [class.disabled]=\"input.invalid\" [disabled]=\"input.invalid\" (click)=\"onCreate()\">OK</button>\r\n  </div>\r\n</div>");
 
 /***/ }),
 
@@ -257,7 +257,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"tasks\">\r\n  <div\r\n    class=\"sortable\"\r\n    [class.empty]=\"tasks.length === 0\"\r\n    [sortablejs]=\"tasks\"\r\n    [sortablejsOptions]=\"sortableOptions\"\r\n  >\r\n    <div class=\"card\" *ngFor=\"let task of tasks\" [attr.data-id]=\"task._id\">\r\n      <div tabindex=\"0\" [attr.aria-label]=\"task.name\" class=\"card-content\">\r\n        {{ task.name }}\r\n        <span\r\n          ><a href=\"#\" class=\"delete-icon\" (click)=\"onDelete(task)\"\r\n            ><i class=\"fas fa-trash\"></i></a\r\n        ></span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a href=\"#\" (click)=\"addTask()\">Add task</a>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"tasks\">\r\n  <div class=\"sortable\" [class.empty]=\"tasks.length === 0\" [sortablejs]=\"tasks\" [sortablejsOptions]=\"sortableOptions\">\r\n    <div class=\"card\" *ngFor=\"let task of tasks\" [attr.data-id]=\"task._id\">\r\n      <div tabindex=\"0\" [attr.aria-label]=\"task.name\" class=\"card-content\">\r\n        <span class=\"truncate\" title=\"{{ task.name }}\">{{ task.name }}</span>\r\n        <span class=\"clearfix\"><a href=\"#\" class=\"delete-icon\" (click)=\"onDelete(task)\"><i\r\n              class=\"fas fa-trash\"></i></a></span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a href=\"#\" (click)=\"addTask()\">Add task</a>\r\n</div>");
 
 /***/ }),
 
@@ -270,7 +270,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"task-planner\">\r\n  <div class=\"header\">\r\n    <div class=\"title\">\r\n      <h3>Task Planner</h3>\r\n    </div>\r\n    <div class=\"add-list\"><a href=\"#\" (click)=\"addList()\">Add List</a></div>\r\n  </div>\r\n\r\n  <div class=\"task-board\">\r\n    <div class=\"lists\">\r\n      <div class=\"list\" *ngFor=\"let tasklist of taskLists\">\r\n        <div style=\"padding-right: 7px;\">\r\n          <span tabindex=\"0\" [attr.aria-label]=\"tasklist.name\">\r\n            <h5 style=\"display: inline-block;\">{{ tasklist.name }}</h5>\r\n          </span>\r\n          <a href=\"#\" class=\"delete-icon\" (click)=\"onDeleteTaskList(tasklist)\">\r\n            <i class=\"fas fa-trash danger\"></i>\r\n          </a>\r\n        </div>\r\n        <task-list [taskList]=\"tasklist\"></task-list>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"task-planner\">\r\n  <div class=\"header\">\r\n    <h3 class=\"title\">Task Planner</h3>\r\n    <a href=\"#\" class=\"add-list\" (click)=\"addList()\">Add List</a>\r\n  </div>\r\n\r\n  <div class=\"task-board clearfix\">\r\n    <div class=\"lists\">\r\n      <div class=\"list\" *ngFor=\"let tasklist of taskLists\">\r\n        <div class=\"clearfix\">\r\n          <span tabindex=\"0\" [attr.aria-label]=\"tasklist.name\">\r\n            <h5 class=\"truncate\" title=\"{{ tasklist.name }}\">\r\n              {{ tasklist.name }}\r\n            </h5>\r\n          </span>\r\n          <a href=\"#\" class=\"delete-icon\" (click)=\"onDeleteTaskList(tasklist)\">\r\n            <i class=\"fas fa-trash danger\"></i>\r\n          </a>\r\n        </div>\r\n        <task-list [taskList]=\"tasklist\"></task-list>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -3359,23 +3359,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppHttpInterceptor", function() { return AppHttpInterceptor; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var rxjs_add_operator_do__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/add/operator/do */ "./node_modules/rxjs-compat/_esm2015/add/operator/do.js");
-/* harmony import */ var rxjs_add_operator_catch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/add/operator/catch */ "./node_modules/rxjs-compat/_esm2015/add/operator/catch.js");
-/* harmony import */ var rxjs_add_observable_throw__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/add/observable/throw */ "./node_modules/rxjs-compat/_esm2015/add/observable/throw.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-
-
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 
 
 
 
 let AppHttpInterceptor = class AppHttpInterceptor {
     intercept(request, next) {
-        const customReq = request.clone({
-            headers: request.headers.set('app-author', 'test')
+        let authorizedRequest;
+        // Add header key-values to each request
+        authorizedRequest = request.clone({
+            headers: request.headers.set("Authorization", "Bearer token"),
         });
-        console.log('processing interceptor request :->', customReq);
-        return next.handle(customReq).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(console.log, console.log));
+        if (!authorizedRequest.headers.has("Content-Type")) {
+            authorizedRequest = authorizedRequest.clone({
+                headers: authorizedRequest.headers.set("Content-Type", "application/json"),
+            });
+        }
+        authorizedRequest = authorizedRequest.clone({
+            headers: authorizedRequest.headers.set("Accept", "application/json"),
+        });
+        /*
+         * Handle the error status code and messages at common place.
+         * Use dialog or toaster to show the messages .
+         * Use status code to design the error logging for server or for user.
+         */
+        return next.handle(authorizedRequest).pipe(
+        // Give a one more retry for slower devices
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])((error) => {
+            let errorMessage = '';
+            console.log(error);
+            if (error.error instanceof ErrorEvent) {
+                // client-side error
+                errorMessage = `Error: ${error.error.message}`;
+            }
+            else {
+                // server-side error
+                errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            }
+            window.alert(errorMessage); // Show error gracefully, instead of alert window
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(errorMessage);
+        }));
     }
 };
 AppHttpInterceptor = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -3415,11 +3440,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Component to get the user confirmation before deteling a tasklist or task.
+ */
 let ConfirmDialogComponent = class ConfirmDialogComponent {
     constructor(activeModal) {
         this.activeModal = activeModal;
         this.onDelete = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }
+    /**
+     * Method to handle the click for `Yes` action
+     */
     onDeleteClick() {
         this.onDelete.emit(true);
         this.activeModal.close();
@@ -3436,7 +3467,7 @@ Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], ConfirmDialogComponent.prototype, "onDelete", void 0);
 ConfirmDialogComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'confirm-dialog',
+        selector: "confirm-dialog",
         template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./confirm-dialog.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/task-planner/dialogs/confirm-dialogs/confirm-dialog.component.html")).default,
         changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].OnPush,
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./confirm-dialog.component.scss */ "./src/app/task-planner/dialogs/confirm-dialogs/confirm-dialog.component.scss")).default]
@@ -3478,6 +3509,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Component to get the user input for adding new tasklist or task
+ */
 let InputDialogComponent = class InputDialogComponent {
     constructor(activeModal) {
         this.activeModal = activeModal;
@@ -3487,6 +3521,9 @@ let InputDialogComponent = class InputDialogComponent {
     set initialValue(value) {
         this.input.setValue(value);
     }
+    /**
+     * Method to create the taskList or task
+     */
     onCreate() {
         this.onSubmit.emit(this.input.value);
         this.activeModal.close();
@@ -3530,26 +3567,44 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Hearder option for http request to set the key-values into header
+ */
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-        'Content-Type': 'application/json; charset=UTF-8',
-    })
+        "Content-Type": "application/json; charset=UTF-8",
+    }),
 };
 let TaskListService = class TaskListService {
     constructor(http) {
         this.http = http;
-        // private taskListUrl: string ='https://my-json-server.typicode.com/Amitesh/task-planner/data?12';
-        this.taskListUrl = 'http://localhost:3000/tasks-list';
+        // TaskList resource api end point. It can be put in a constant config file.
+        this.taskListUrl = "/tasks-list";
     }
+    /**
+     * API service method to get the all task list and it's tasks.
+     */
     get() {
         return this.http.get(`${this.taskListUrl}`);
     }
+    /**
+     * API service method to add new task
+     * @param taskList
+     */
     post(taskList) {
         return this.http.post(this.taskListUrl, taskList, httpOptions);
     }
+    /**
+     * API service method to update the tasklist
+     * @param taskList
+     */
     put(taskList) {
         return this.http.put(this.taskListUrl, taskList, httpOptions);
     }
+    /**
+     * API service method to delete a task list for given id
+     * @param taskList
+     */
     delete(taskList) {
         return this.http.delete(`${this.taskListUrl}\\${taskList._id}`, httpOptions);
     }
@@ -3581,26 +3636,48 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Hearder option for http request to set the key-values into header
+ */
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-        'Content-Type': 'application/json; charset=UTF-8',
-    })
+        "Content-Type": "application/json; charset=UTF-8",
+    }),
 };
 let TaskService = class TaskService {
     constructor(http) {
         this.http = http;
-        // private taskListUrl: string ='https://my-json-server.typicode.com/Amitesh/task-planner/data?12';
-        this.taskListUrl = 'http://localhost:3000/tasks-list';
+        // TaskList resource api end point. It can be put in a constant config file.
+        this.taskListUrl = "/tasks-list";
     }
+    /**
+     * API service method to get the all tasks of given tasklist id
+     * @param taskListId
+     */
     get(taskListId) {
         return this.http.get(`${this.taskListUrl}\/${taskListId}\/tasks`);
     }
+    /**
+     * API service method to add a new task under the given task list id.
+     * @param taskListId
+     * @param task
+     */
     post(taskListId, task) {
         return this.http.post(`${this.taskListUrl}\/${taskListId}\/tasks`, task, httpOptions);
     }
+    /**
+     * API service method to update the task details of given task id and it's task list id.
+     * @param taskListId
+     * @param task
+     */
     put(taskListId, task) {
         return this.http.put(`${this.taskListUrl}\/${taskListId}\/tasks\/${task._id}`, task, httpOptions);
     }
+    /**
+     * API service method to delete a task from a task list.
+     * @param taskListId
+     * @param task
+     */
     delete(taskListId, task) {
         return this.http.delete(`${this.taskListUrl}\/${taskListId}\/tasks\/${task._id}`, httpOptions);
     }
@@ -3625,7 +3702,7 @@ TaskService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".task {\n  border: 1px solid #fafafa;\n  margin: 2px;\n}\n\n.sortable.empty::after {\n  content: \"Empty\";\n  text-align: center;\n  vertical-align: middle;\n  line-height: 30px;\n  color: #b7b7b7;\n}\n\n.sortable {\n  background: #eee;\n  border-radius: 0.25rem;\n  min-height: 40px;\n}\n\n.card .delete-icon {\n  display: none;\n}\n\n.card:hover .delete-icon {\n  display: block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hbWl0ZXNoL2Fob21lL3Byb2plY3RzL3R0L3Rhc2stcGxhbm5lci9zcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLWxpc3QvdGFzay1saXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC90YXNrLXBsYW5uZXIvdGFzay1saXN0L3Rhc2stbGlzdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHlCQUFBO0VBQ0EsV0FBQTtBQ0NGOztBREVBO0VBQ0UsZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLHNCQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZ0JBQUE7QUNDRjs7QURHRTtFQUNFLGFBQUE7QUNBSjs7QURHRTtFQUNFLGNBQUE7QUNESiIsImZpbGUiOiJzcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLWxpc3QvdGFzay1saXN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRhc2sge1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICNmYWZhZmE7XHJcbiAgbWFyZ2luOiAycHg7XHJcbn1cclxuXHJcbi5zb3J0YWJsZS5lbXB0eTo6YWZ0ZXIge1xyXG4gIGNvbnRlbnQ6IFwiRW1wdHlcIjtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcclxuICBsaW5lLWhlaWdodDogMzBweDtcclxuICBjb2xvcjogI2I3YjdiNztcclxufVxyXG5cclxuLnNvcnRhYmxlIHtcclxuICBiYWNrZ3JvdW5kOiAjZWVlO1xyXG4gIGJvcmRlci1yYWRpdXM6IDAuMjVyZW07XHJcbiAgbWluLWhlaWdodDogNDBweDtcclxufVxyXG5cclxuLmNhcmQge1xyXG4gIC5kZWxldGUtaWNvbiB7XHJcbiAgICBkaXNwbGF5OiBub25lO1xyXG4gIH1cclxuXHJcbiAgJjpob3ZlciAuZGVsZXRlLWljb24ge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgfVxyXG59XHJcbiIsIi50YXNrIHtcbiAgYm9yZGVyOiAxcHggc29saWQgI2ZhZmFmYTtcbiAgbWFyZ2luOiAycHg7XG59XG5cbi5zb3J0YWJsZS5lbXB0eTo6YWZ0ZXIge1xuICBjb250ZW50OiBcIkVtcHR5XCI7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgbGluZS1oZWlnaHQ6IDMwcHg7XG4gIGNvbG9yOiAjYjdiN2I3O1xufVxuXG4uc29ydGFibGUge1xuICBiYWNrZ3JvdW5kOiAjZWVlO1xuICBib3JkZXItcmFkaXVzOiAwLjI1cmVtO1xuICBtaW4taGVpZ2h0OiA0MHB4O1xufVxuXG4uY2FyZCAuZGVsZXRlLWljb24ge1xuICBkaXNwbGF5OiBub25lO1xufVxuLmNhcmQ6aG92ZXIgLmRlbGV0ZS1pY29uIHtcbiAgZGlzcGxheTogYmxvY2s7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".task {\n  border: 1px solid #fafafa;\n  margin: 2px;\n}\n\n.sortable {\n  background: #eee;\n  border-radius: 0.25rem;\n  min-height: 40px;\n}\n\n.sortable.empty::after {\n  content: \"Empty\";\n  text-align: center;\n  vertical-align: middle;\n  line-height: 30px;\n  color: #b7b7b7;\n}\n\n.card {\n  background-color: #ccdce6;\n  border-radius: 4px;\n  font-size: 0.9rem;\n  margin-bottom: 8px;\n  min-height: 33px;\n  position: relative;\n  overflow: hidden;\n}\n\n.card .card-content {\n  background-color: #fff;\n  padding: 6px 8px;\n  min-height: 33px;\n}\n\n.card .card-content .truncate {\n  max-width: 85%;\n  display: inline-block;\n}\n\n.card .delete-icon {\n  float: right;\n  color: #c3c3c3;\n  cursor: pointer;\n  text-decoration: none;\n  display: none;\n}\n\n.card .delete-icon:hover {\n  color: #3a80de;\n}\n\n.card:hover .delete-icon {\n  display: block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hbWl0ZXNoL2Fob21lL3Byb2plY3RzL3R0L3Rhc2stcGxhbm5lci9zcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLWxpc3QvdGFzay1saXN0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC90YXNrLXBsYW5uZXIvdGFzay1saXN0L3Rhc2stbGlzdC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRQTtFQUNFLHlCQUFBO0VBQ0EsV0FBQTtBQ1BGOztBRFVBO0VBQ0UsZ0JBVGM7RUFVZCxzQkFBQTtFQUNBLGdCQUFBO0FDUEY7O0FEU0U7RUFDRSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0Esc0JBQUE7RUFDQSxpQkFBQTtFQUNBLGNBbkJVO0FDWWQ7O0FEV0E7RUFDRSx5QkEzQmlCO0VBNEJqQixrQkFBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsZ0JBQUE7QUNSRjs7QURVRTtFQUNFLHNCQXJDSTtFQXNDSixnQkFBQTtFQUNBLGdCQUFBO0FDUko7O0FEVUk7RUFDRSxjQUFBO0VBQ0EscUJBQUE7QUNSTjs7QURZRTtFQUNFLFlBQUE7RUFDQSxjQS9DVztFQWdEWCxlQUFBO0VBQ0EscUJBQUE7RUFDQSxhQUFBO0FDVko7O0FEWUk7RUFDRSxjQXBEYTtBQzBDbkI7O0FEY0U7RUFDRSxjQUFBO0FDWkoiLCJmaWxlIjoic3JjL2FwcC90YXNrLXBsYW5uZXIvdGFzay1saXN0L3Rhc2stbGlzdC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiR3aGl0ZTogI2ZmZjtcclxuJGNvbG9yX2JvdHRpY2VsbGk6ICNjY2RjZTY7XHJcbiRjb2xvcl9zaWx2ZXI6ICNjM2MzYzM7XHJcbiRjb2xvcl9yb3lhbF9ibHVlOiAjM2E4MGRlO1xyXG4kY29sb3Jfbm9iZWw6ICNiN2I3Yjc7XHJcbiRjb2xvcl9nYWxsZXJ5OiAjZWVlO1xyXG4kYWxhYmFzdGVyOiAjZmFmYWZhO1xyXG5cclxuLnRhc2sge1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICRhbGFiYXN0ZXI7XHJcbiAgbWFyZ2luOiAycHg7XHJcbn1cclxuXHJcbi5zb3J0YWJsZSB7XHJcbiAgYmFja2dyb3VuZDogJGNvbG9yX2dhbGxlcnk7XHJcbiAgYm9yZGVyLXJhZGl1czogMC4yNXJlbTtcclxuICBtaW4taGVpZ2h0OiA0MHB4O1xyXG5cclxuICAmLmVtcHR5OjphZnRlciB7XHJcbiAgICBjb250ZW50OiBcIkVtcHR5XCI7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgbGluZS1oZWlnaHQ6IDMwcHg7XHJcbiAgICBjb2xvcjogJGNvbG9yX25vYmVsO1xyXG4gIH1cclxufVxyXG5cclxuLmNhcmQge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcl9ib3R0aWNlbGxpO1xyXG4gIGJvcmRlci1yYWRpdXM6IDRweDtcclxuICBmb250LXNpemU6IDAuOXJlbTtcclxuICBtYXJnaW4tYm90dG9tOiA4cHg7XHJcbiAgbWluLWhlaWdodDogMzNweDtcclxuICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuXHJcbiAgLmNhcmQtY29udGVudCB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkd2hpdGU7XHJcbiAgICBwYWRkaW5nOiA2cHggOHB4O1xyXG4gICAgbWluLWhlaWdodDogMzNweDtcclxuXHJcbiAgICAudHJ1bmNhdGUge1xyXG4gICAgICBtYXgtd2lkdGg6IDg1JTtcclxuICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgLmRlbGV0ZS1pY29uIHtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICAgIGNvbG9yOiAkY29sb3Jfc2lsdmVyO1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgZGlzcGxheTogbm9uZTtcclxuXHJcbiAgICAmOmhvdmVyIHtcclxuICAgICAgY29sb3I6ICRjb2xvcl9yb3lhbF9ibHVlO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgJjpob3ZlciAuZGVsZXRlLWljb24ge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgfVxyXG59XHJcbiIsIi50YXNrIHtcbiAgYm9yZGVyOiAxcHggc29saWQgI2ZhZmFmYTtcbiAgbWFyZ2luOiAycHg7XG59XG5cbi5zb3J0YWJsZSB7XG4gIGJhY2tncm91bmQ6ICNlZWU7XG4gIGJvcmRlci1yYWRpdXM6IDAuMjVyZW07XG4gIG1pbi1oZWlnaHQ6IDQwcHg7XG59XG4uc29ydGFibGUuZW1wdHk6OmFmdGVyIHtcbiAgY29udGVudDogXCJFbXB0eVwiO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gIGxpbmUtaGVpZ2h0OiAzMHB4O1xuICBjb2xvcjogI2I3YjdiNztcbn1cblxuLmNhcmQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjY2NkY2U2O1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGZvbnQtc2l6ZTogMC45cmVtO1xuICBtYXJnaW4tYm90dG9tOiA4cHg7XG4gIG1pbi1oZWlnaHQ6IDMzcHg7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cbi5jYXJkIC5jYXJkLWNvbnRlbnQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmO1xuICBwYWRkaW5nOiA2cHggOHB4O1xuICBtaW4taGVpZ2h0OiAzM3B4O1xufVxuLmNhcmQgLmNhcmQtY29udGVudCAudHJ1bmNhdGUge1xuICBtYXgtd2lkdGg6IDg1JTtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xufVxuLmNhcmQgLmRlbGV0ZS1pY29uIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBjb2xvcjogI2MzYzNjMztcbiAgY3Vyc29yOiBwb2ludGVyO1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4uY2FyZCAuZGVsZXRlLWljb246aG92ZXIge1xuICBjb2xvcjogIzNhODBkZTtcbn1cbi5jYXJkOmhvdmVyIC5kZWxldGUtaWNvbiB7XG4gIGRpc3BsYXk6IGJsb2NrO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -3642,19 +3719,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/__ivy_ngcc__/fesm2015/ng-bootstrap.js");
-/* harmony import */ var _dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dialogs/input-dialogs/input-dialog.component */ "./src/app/task-planner/dialogs/input-dialogs/input-dialog.component.ts");
-/* harmony import */ var _dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dialogs/confirm-dialogs/confirm-dialog.component */ "./src/app/task-planner/dialogs/confirm-dialogs/confirm-dialog.component.ts");
-/* harmony import */ var _sevices_task_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../sevices/task.service */ "./src/app/task-planner/sevices/task.service.ts");
+/* harmony import */ var _sevices_task_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sevices/task.service */ "./src/app/task-planner/sevices/task.service.ts");
+/* harmony import */ var _dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../dialogs/input-dialogs/input-dialog.component */ "./src/app/task-planner/dialogs/input-dialogs/input-dialog.component.ts");
+/* harmony import */ var _dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../dialogs/confirm-dialogs/confirm-dialog.component */ "./src/app/task-planner/dialogs/confirm-dialogs/confirm-dialog.component.ts");
 
 
 
 
 
 
+/**
+ * Task component to render the individual task
+ */
 let TaskListComponent = class TaskListComponent {
     constructor(dialogService, taskService) {
         this.dialogService = dialogService;
         this.taskService = taskService;
+        /**
+         * Set Sortablejs configuration for group name and callbacks
+         */
         this.sortableOptions = {
             group: "task-planner-group",
             onAdd: (event) => {
@@ -3668,6 +3751,10 @@ let TaskListComponent = class TaskListComponent {
     ngOnInit() {
         this.tasks = this.taskList.tasks || [];
     }
+    /**
+     * Method to call on adding a task from one list to other list.
+     * @param event
+     */
     onAddTaskByDragAndDrop(event) {
         let toTaskListId;
         let task;
@@ -3682,6 +3769,10 @@ let TaskListComponent = class TaskListComponent {
             console.error(error);
         }
     }
+    /**
+     * Method to call on removing a task from one list to other list.
+     * @param event
+     */
     onRemoveTaskByDragAndDrop(event) {
         let fromTaskListId;
         let taskId;
@@ -3696,8 +3787,11 @@ let TaskListComponent = class TaskListComponent {
             console.error(error);
         }
     }
+    /**
+     * Open a popup to add a new task to selected task list.
+     */
     addTask() {
-        const dialogObj = this.dialogService.open(_dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_3__["InputDialogComponent"], {
+        const dialogObj = this.dialogService.open(_dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_4__["InputDialogComponent"], {
             backdrop: "static",
         });
         dialogObj.componentInstance.title = "Add new task";
@@ -3715,8 +3809,12 @@ let TaskListComponent = class TaskListComponent {
             }
         });
     }
+    /**
+     * Open a confirmation popup to delete the selected task
+     * @param taskToDelete
+     */
     onDelete(taskToDelete) {
-        const dialogObj = this.dialogService.open(_dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_4__["ConfirmDialogComponent"], {
+        const dialogObj = this.dialogService.open(_dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_5__["ConfirmDialogComponent"], {
             backdrop: "static",
         });
         dialogObj.componentInstance.title = "Delete task";
@@ -3739,7 +3837,7 @@ let TaskListComponent = class TaskListComponent {
 };
 TaskListComponent.ctorParameters = () => [
     { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"] },
-    { type: _sevices_task_service__WEBPACK_IMPORTED_MODULE_5__["TaskService"] }
+    { type: _sevices_task_service__WEBPACK_IMPORTED_MODULE_3__["TaskService"] }
 ];
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -3765,7 +3863,7 @@ TaskListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".task-planner {\n  margin: 10px 0;\n  background-color: #dfdfdf;\n}\n.task-planner .header {\n  color: #222;\n}\n.task-planner .lists {\n  padding: 2px;\n  display: flex;\n  flex-direction: row;\n}\n.task-planner .list {\n  border: 1px solid blue;\n  margin: 2px;\n  width: 25%;\n  min-width: 200px;\n  max-width: 300px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hbWl0ZXNoL2Fob21lL3Byb2plY3RzL3R0L3Rhc2stcGxhbm5lci9zcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLXBsYW5uZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLXBsYW5uZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUFBO0VBQ0EseUJBQUE7QUNDRjtBRENFO0VBQ0UsV0FBQTtBQ0NKO0FERUU7RUFDRSxZQUFBO0VBQ0EsYUFBQTtFQUNBLG1CQUFBO0FDQUo7QURHRTtFQUNFLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLFVBQUE7RUFDQSxnQkFBQTtFQUNBLGdCQUFBO0FDREoiLCJmaWxlIjoic3JjL2FwcC90YXNrLXBsYW5uZXIvdGFzay1wbGFubmVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRhc2stcGxhbm5lciB7XHJcbiAgbWFyZ2luOiAxMHB4IDA7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RmZGZkZjtcclxuXHJcbiAgLmhlYWRlciB7XHJcbiAgICBjb2xvcjogIzIyMjtcclxuICB9XHJcblxyXG4gIC5saXN0cyB7XHJcbiAgICBwYWRkaW5nOiAycHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICB9XHJcblxyXG4gIC5saXN0IHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkIGJsdWU7XHJcbiAgICBtYXJnaW46IDJweDtcclxuICAgIHdpZHRoOiAyNSU7XHJcbiAgICBtaW4td2lkdGg6IDIwMHB4O1xyXG4gICAgbWF4LXdpZHRoOiAzMDBweDtcclxuICB9XHJcbn1cclxuIiwiLnRhc2stcGxhbm5lciB7XG4gIG1hcmdpbjogMTBweCAwO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGZkZmRmO1xufVxuLnRhc2stcGxhbm5lciAuaGVhZGVyIHtcbiAgY29sb3I6ICMyMjI7XG59XG4udGFzay1wbGFubmVyIC5saXN0cyB7XG4gIHBhZGRpbmc6IDJweDtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbn1cbi50YXNrLXBsYW5uZXIgLmxpc3Qge1xuICBib3JkZXI6IDFweCBzb2xpZCBibHVlO1xuICBtYXJnaW46IDJweDtcbiAgd2lkdGg6IDI1JTtcbiAgbWluLXdpZHRoOiAyMDBweDtcbiAgbWF4LXdpZHRoOiAzMDBweDtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".task-planner {\n  margin: 10px 0 30px 0;\n  border-radius: 16px;\n  cursor: default;\n  font-size: 1rem;\n  overflow: hidden;\n  padding: 18px;\n  text-align: left;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.task-planner .header {\n  color: #222;\n  padding-bottom: 16px;\n}\n.task-planner .header h3.title {\n  display: inline-block;\n  font-size: 1.25rem;\n  letter-spacing: 1px;\n  margin: 0;\n  background: #0b568b;\n  border-radius: 6px;\n  color: #fff;\n  padding: 9px 15px;\n}\n.task-planner .task-board {\n  min-width: 100%;\n}\n.task-planner .task-board .lists {\n  margin: 0 10px 5px 0;\n  display: flex;\n  flex-direction: row;\n  overflow: auto;\n}\n.task-planner .task-board .lists .list {\n  background-color: #e5eff5;\n  border-radius: 6px;\n  box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.29);\n  padding: 8px;\n  border: 1px solid #fff;\n  margin: 5px;\n  width: 25%;\n  min-width: 200px;\n  max-width: 300px;\n}\n.task-planner .task-board .lists .list:first-child {\n  margin-left: 0px;\n}\n.task-planner .task-board .lists .list h5 {\n  font-size: 1rem;\n  letter-spacing: 0.5px;\n  margin: 0 0 8px 3px;\n  display: inline-block;\n  text-transform: capitalize;\n  width: 90%;\n}\n.delete-icon {\n  float: right;\n  color: #c3c3c3;\n  cursor: pointer;\n  text-decoration: none;\n}\n.delete-icon:hover {\n  color: #f95454;\n}\na.add-list {\n  margin-top: 6px;\n  color: #fff;\n  margin-left: 32px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hbWl0ZXNoL2Fob21lL3Byb2plY3RzL3R0L3Rhc2stcGxhbm5lci9zcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLXBsYW5uZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3Rhc2stcGxhbm5lci90YXNrLXBsYW5uZXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBU0E7RUFDRSxxQkFBQTtFQUNBLG1CQUFBO0VBQ0EsZUFBQTtFQUNBLGVBQUE7RUFDQSxnQkFBQTtFQUNBLGFBQUE7RUFDQSxnQkFBQTtFQUNBLHlCQUFBO0tBQUEsc0JBQUE7TUFBQSxxQkFBQTtVQUFBLGlCQUFBO0FDUkY7QURVRTtFQUNFLFdBbkJlO0VBb0JmLG9CQUFBO0FDUko7QURVSTtFQUNFLHFCQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLFNBQUE7RUFDQSxtQkFyQnFCO0VBc0JyQixrQkFBQTtFQUNBLFdBNUJFO0VBNkJGLGlCQUFBO0FDUk47QURZRTtFQUNFLGVBQUE7QUNWSjtBRFlJO0VBQ0Usb0JBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSxjQUFBO0FDVk47QURZTTtFQUNFLHlCQXZDZTtFQXdDZixrQkFBQTtFQUNBLCtDQUFBO0VBQ0EsWUFBQTtFQUNBLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLFVBQUE7RUFDQSxnQkFBQTtFQUNBLGdCQUFBO0FDVlI7QURZUTtFQUNFLGdCQUFBO0FDVlY7QURhUTtFQUNFLGVBQUE7RUFDQSxxQkFBQTtFQUNBLG1CQUFBO0VBQ0EscUJBQUE7RUFDQSwwQkFBQTtFQUNBLFVBQUE7QUNYVjtBRGtCQTtFQUNFLFlBQUE7RUFDQSxjQXRFYTtFQXVFYixlQUFBO0VBQ0EscUJBQUE7QUNmRjtBRGlCRTtFQUNFLGNBMUVrQjtBQzJEdEI7QURtQkE7RUFDRSxlQUFBO0VBQ0EsV0FuRk07RUFvRk4saUJBQUE7QUNoQkYiLCJmaWxlIjoic3JjL2FwcC90YXNrLXBsYW5uZXIvdGFzay1wbGFubmVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLy9jb2xvcnNcclxuJGNvbG9yX21pbmVfc2hhZnQ6ICMyMjI7XHJcbiR3aGl0ZTogI2ZmZjtcclxuJGJsYWNrXzI5OiByZ2JhKDAsIDAsIDAsIDAuMjkpO1xyXG4kY29sb3Jfc2lsdmVyOiAjYzNjM2MzO1xyXG4kY29sb3Jfc3Vuc2V0X29yYW5nZTogI2Y5NTQ1NDtcclxuJGNvbG9yX2NhdHNraWxsX3doaXRlOiAjZTVlZmY1O1xyXG4kY29sb3JfdmVuaWNlX2JsdWVfYXBwcm94OiAjMGI1NjhiO1xyXG5cclxuLnRhc2stcGxhbm5lciB7XHJcbiAgbWFyZ2luOiAxMHB4IDAgMzBweCAwO1xyXG4gIGJvcmRlci1yYWRpdXM6IDE2cHg7XHJcbiAgY3Vyc29yOiBkZWZhdWx0O1xyXG4gIGZvbnQtc2l6ZTogMXJlbTtcclxuICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gIHBhZGRpbmc6IDE4cHg7XHJcbiAgdGV4dC1hbGlnbjogbGVmdDtcclxuICB1c2VyLXNlbGVjdDogbm9uZTtcclxuXHJcbiAgLmhlYWRlciB7XHJcbiAgICBjb2xvcjogJGNvbG9yX21pbmVfc2hhZnQ7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTZweDtcclxuXHJcbiAgICBoMy50aXRsZSB7XHJcbiAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgICAgZm9udC1zaXplOiAxLjI1cmVtO1xyXG4gICAgICBsZXR0ZXItc3BhY2luZzogMXB4O1xyXG4gICAgICBtYXJnaW46IDA7XHJcbiAgICAgIGJhY2tncm91bmQ6ICRjb2xvcl92ZW5pY2VfYmx1ZV9hcHByb3g7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcclxuICAgICAgY29sb3I6ICR3aGl0ZTtcclxuICAgICAgcGFkZGluZzogOXB4IDE1cHg7XHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICAudGFzay1ib2FyZCB7XHJcbiAgICBtaW4td2lkdGg6IDEwMCU7XHJcblxyXG4gICAgLmxpc3RzIHtcclxuICAgICAgbWFyZ2luOiAwIDEwcHggNXB4IDA7XHJcbiAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XHJcbiAgICAgIG92ZXJmbG93OiBhdXRvO1xyXG5cclxuICAgICAgLmxpc3Qge1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcl9jYXRza2lsbF93aGl0ZTtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiA2cHg7XHJcbiAgICAgICAgYm94LXNoYWRvdzogMXB4IDNweCA1cHggMHB4ICRibGFja18yOTtcclxuICAgICAgICBwYWRkaW5nOiA4cHg7XHJcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgJHdoaXRlO1xyXG4gICAgICAgIG1hcmdpbjogNXB4O1xyXG4gICAgICAgIHdpZHRoOiAyNSU7XHJcbiAgICAgICAgbWluLXdpZHRoOiAyMDBweDtcclxuICAgICAgICBtYXgtd2lkdGg6IDMwMHB4O1xyXG5cclxuICAgICAgICAmOmZpcnN0LWNoaWxkIHtcclxuICAgICAgICAgIG1hcmdpbi1sZWZ0OiAwcHg7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBoNSB7XHJcbiAgICAgICAgICBmb250LXNpemU6IDFyZW07XHJcbiAgICAgICAgICBsZXR0ZXItc3BhY2luZzogMC41cHg7XHJcbiAgICAgICAgICBtYXJnaW46IDAgMCA4cHggM3B4O1xyXG4gICAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemU7XHJcbiAgICAgICAgICB3aWR0aDogOTAlO1xyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgfVxyXG4gIH1cclxufVxyXG5cclxuLmRlbGV0ZS1pY29uIHtcclxuICBmbG9hdDogcmlnaHQ7XHJcbiAgY29sb3I6ICRjb2xvcl9zaWx2ZXI7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuXHJcbiAgJjpob3ZlciB7XHJcbiAgICBjb2xvcjogJGNvbG9yX3N1bnNldF9vcmFuZ2U7XHJcbiAgfVxyXG59XHJcblxyXG5hLmFkZC1saXN0IHtcclxuICBtYXJnaW4tdG9wOiA2cHg7XHJcbiAgY29sb3I6ICR3aGl0ZTtcclxuICBtYXJnaW4tbGVmdDogMzJweDtcclxufVxyXG4iLCIudGFzay1wbGFubmVyIHtcbiAgbWFyZ2luOiAxMHB4IDAgMzBweCAwO1xuICBib3JkZXItcmFkaXVzOiAxNnB4O1xuICBjdXJzb3I6IGRlZmF1bHQ7XG4gIGZvbnQtc2l6ZTogMXJlbTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgcGFkZGluZzogMThweDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgdXNlci1zZWxlY3Q6IG5vbmU7XG59XG4udGFzay1wbGFubmVyIC5oZWFkZXIge1xuICBjb2xvcjogIzIyMjtcbiAgcGFkZGluZy1ib3R0b206IDE2cHg7XG59XG4udGFzay1wbGFubmVyIC5oZWFkZXIgaDMudGl0bGUge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGZvbnQtc2l6ZTogMS4yNXJlbTtcbiAgbGV0dGVyLXNwYWNpbmc6IDFweDtcbiAgbWFyZ2luOiAwO1xuICBiYWNrZ3JvdW5kOiAjMGI1NjhiO1xuICBib3JkZXItcmFkaXVzOiA2cHg7XG4gIGNvbG9yOiAjZmZmO1xuICBwYWRkaW5nOiA5cHggMTVweDtcbn1cbi50YXNrLXBsYW5uZXIgLnRhc2stYm9hcmQge1xuICBtaW4td2lkdGg6IDEwMCU7XG59XG4udGFzay1wbGFubmVyIC50YXNrLWJvYXJkIC5saXN0cyB7XG4gIG1hcmdpbjogMCAxMHB4IDVweCAwO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBvdmVyZmxvdzogYXV0bztcbn1cbi50YXNrLXBsYW5uZXIgLnRhc2stYm9hcmQgLmxpc3RzIC5saXN0IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2U1ZWZmNTtcbiAgYm9yZGVyLXJhZGl1czogNnB4O1xuICBib3gtc2hhZG93OiAxcHggM3B4IDVweCAwcHggcmdiYSgwLCAwLCAwLCAwLjI5KTtcbiAgcGFkZGluZzogOHB4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjZmZmO1xuICBtYXJnaW46IDVweDtcbiAgd2lkdGg6IDI1JTtcbiAgbWluLXdpZHRoOiAyMDBweDtcbiAgbWF4LXdpZHRoOiAzMDBweDtcbn1cbi50YXNrLXBsYW5uZXIgLnRhc2stYm9hcmQgLmxpc3RzIC5saXN0OmZpcnN0LWNoaWxkIHtcbiAgbWFyZ2luLWxlZnQ6IDBweDtcbn1cbi50YXNrLXBsYW5uZXIgLnRhc2stYm9hcmQgLmxpc3RzIC5saXN0IGg1IHtcbiAgZm9udC1zaXplOiAxcmVtO1xuICBsZXR0ZXItc3BhY2luZzogMC41cHg7XG4gIG1hcmdpbjogMCAwIDhweCAzcHg7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemU7XG4gIHdpZHRoOiA5MCU7XG59XG5cbi5kZWxldGUtaWNvbiB7XG4gIGZsb2F0OiByaWdodDtcbiAgY29sb3I6ICNjM2MzYzM7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuLmRlbGV0ZS1pY29uOmhvdmVyIHtcbiAgY29sb3I6ICNmOTU0NTQ7XG59XG5cbmEuYWRkLWxpc3Qge1xuICBtYXJnaW4tdG9wOiA2cHg7XG4gIGNvbG9yOiAjZmZmO1xuICBtYXJnaW4tbGVmdDogMzJweDtcbn0iXX0= */");
 
 /***/ }),
 
@@ -3791,6 +3889,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Task list component to render the each task list and it's task inside it.
+ */
 let TaskPlannerComponent = class TaskPlannerComponent {
     constructor(dialogService, taskListService) {
         this.dialogService = dialogService;
@@ -3799,10 +3900,14 @@ let TaskPlannerComponent = class TaskPlannerComponent {
         this.taskLists = [];
     }
     ngOnInit() {
+        // fetch the all task lists from the server
         this.taskListService.get().subscribe((taskLists) => {
             this.taskLists = taskLists;
         });
     }
+    /**
+     * Open a popup to add a new task list
+     */
     addList() {
         const dialogObj = this.dialogService.open(_dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_3__["InputDialogComponent"], {
             backdrop: "static",
@@ -3816,6 +3921,10 @@ let TaskPlannerComponent = class TaskPlannerComponent {
             });
         });
     }
+    /**
+     * Open the confirmation poup to delete a task list along with it's task
+     * @param taskListToDelete
+     */
     onDeleteTaskList(taskListToDelete) {
         const dialogObj = this.dialogService.open(_dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_5__["ConfirmDialogComponent"], {
             backdrop: "static",
