@@ -39,10 +39,4 @@ export class InputDialogComponent {
     this.onSubmit.emit(this.input.value);
     this.activeModal.close();
   }
-
-  // // test case
-
-  // isFilterValid() {
-  //   return true;
-  // }
 }

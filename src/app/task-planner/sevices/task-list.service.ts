@@ -16,7 +16,7 @@ const httpOptions = {
 @Injectable()
 export class TaskListService {
   // TaskList resource api end point. It can be put in a constant config file.
-  private taskListUrl: string = "http://localhost:3000/tasks-list";
+  taskListUrl: string = "http://localhost:3000/tasks-list";
   // private taskListUrl: string = "/tasks-list";
 
   constructor(private http: HttpClient) {}
@@ -49,7 +49,7 @@ export class TaskListService {
    */
   delete(taskList: TaskList): Observable<TaskList[]> {
     return this.http.delete<TaskList[]>(
-      `${this.taskListUrl}\\${taskList._id}`,
+      `${this.taskListUrl}/${taskList._id}`,
       httpOptions
     );
   }
