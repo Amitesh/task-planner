@@ -97,7 +97,7 @@ export class TaskListComponent {
             this.tasks = this.taskList.tasks;
           });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     });
   }
