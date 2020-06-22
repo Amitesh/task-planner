@@ -3,10 +3,10 @@
     <div class="card" *ngFor="let task of tasks" [attr.data-id]="task._id">
       <div tabindex="0" [attr.aria-label]="task.name" class="card-content">
         <span class="truncate" title="{{ task.name }}">{{ task.name }}</span>
-        <span class="clearfix"><a href="#" class="delete-icon" (click)="onDelete(task)"><i
+        <span class="clearfix"><a href="#" class="task-delete delete-icon" (click)="onDelete(task)"><i
               class="fas fa-trash"></i></a></span>
       </div>
     </div>
   </div>
-  <a href="#" (click)="addTask()">Add task</a>
+  <a href="#" class="add-task-btn" (click)="addTask()">Add task</a>
 </div>

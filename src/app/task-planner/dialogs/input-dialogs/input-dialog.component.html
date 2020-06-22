@@ -4,13 +4,13 @@
   </div>
   <div class="modal-body">
     <p>Name</p>
-    <input [formControl]="input" type="text" (keydown.enter)="input.valid && onCreate()">
+    <input id="name-input" [formControl]="input" type="text" (keydown.enter)="input.valid && onCreate()">
     <p class="small" [class.text-danger]="input.invalid && input.dirty" *ngIf="input.invalid && input.dirty">Input can't
       be blank.</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Cancel</button>
-    <button type="button" class="btn" [class.btn-outline-dark]="input.invalid" [class.btn-primary]="input.valid"
+    <button type="button" id="cancel-btn" class="btn btn-outline-dark" (click)="activeModal.close()">Cancel</button>
+    <button type="button" id="ok-btn" class="btn" [class.btn-outline-dark]="input.invalid" [class.btn-primary]="input.valid"
       [class.disabled]="input.invalid" [disabled]="input.invalid" (click)="onCreate()">Ok</button>
   </div>
 </div>
