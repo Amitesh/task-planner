@@ -25,7 +25,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
     if (!authorizedRequest.headers.has("Content-Type")) {
       authorizedRequest = authorizedRequest.clone({
-        headers: authorizedRequest.headers.set("Content-Type", "application/json"),
+        headers: authorizedRequest.headers.set(
+          "Content-Type",
+          "application/json"
+        ),
       });
     }
 
@@ -39,23 +42,23 @@ export class AppHttpInterceptor implements HttpInterceptor {
      */
     return next.handle(authorizedRequest).pipe(
       // Give a one more retry for slower devices
-       retry(1),
-       catchError((error: HttpErrorResponse) => {
-         let errorMessage = '';
-         console.log(error)
-         if (error.error instanceof ErrorEvent) {
-           // client-side error
-           errorMessage = `Error: ${error.error.message}`;
-         } else if(error.error.status){
-           // server-side error
-           errorMessage = `Error Code: ${error.error.status}\nMessage: ${error.error.message}`;
-         } else {
-           // server-side error
-           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-         }
-         window.alert(errorMessage); // Show error gracefully, instead of alert window
-         return throwError(errorMessage);
-       })
+      retry(1),
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = "";
+        console.log(error);
+        if (error.error instanceof ErrorEvent) {
+          // client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else if (error.error.status) {
+          // server-side error
+          errorMessage = `Error Code: ${error.error.status}\nMessage: ${error.error.message}`;
+        } else {
+          // server-side error
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        window.alert(errorMessage); // Show error gracefully, instead of alert window
+        return throwError(errorMessage);
+      })
     );
   }
 }
