@@ -1,57 +1,58 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
 
-import { TaskList } from "../modal/task-list";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { ITaskList } from '../modal/task-list';
 
 /**
  * Hearder option for http request to set the key-values into header
  */
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json; charset=UTF-8",
+    'Content-Type': 'application/json; charset=UTF-8',
   }),
 };
 
 @Injectable()
 export class TaskListService {
   // TaskList resource api end point. It can be put in a constant config file.
-  taskListUrl: string = "http://localhost:3000/tasks-list";
-  // private taskListUrl: string = "/tasks-list";
+  // public taskListUrl = 'http://localhost:3000/tasks-list';
+  public taskListUrl = '/tasks-list';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * API service method to get the all task list and it's tasks.
    */
-  get(): Observable<TaskList[]> {
-    return this.http.get<TaskList[]>(`${this.taskListUrl}`);
+  public get(): Observable<ITaskList[]> {
+    return this.http.get<ITaskList[]>(`${this.taskListUrl}`);
   }
-  
+
   /**
    * API service method to add new task
-   * @param taskList 
+   * @param taskList : TaskList object
    */
-  post(taskList: TaskList): Observable<TaskList[]> {
-    return this.http.post<TaskList[]>(this.taskListUrl, taskList, httpOptions);
+  public post(taskList: ITaskList): Observable<ITaskList[]> {
+    return this.http.post<ITaskList[]>(this.taskListUrl, taskList, httpOptions);
   }
 
   /**
    * API service method to update the tasklist
-   * @param taskList 
+   * @param taskList : TaskList object
    */
-  put(taskList: TaskList): Observable<TaskList[]> {
-    return this.http.put<TaskList[]>(this.taskListUrl, taskList, httpOptions);
+  public put(taskList: ITaskList): Observable<ITaskList[]> {
+    return this.http.put<ITaskList[]>(this.taskListUrl, taskList, httpOptions);
   }
 
   /**
    * API service method to delete a task list for given id
-   * @param taskList 
+   * @param taskList : TaskList object
    */
-  delete(taskList: TaskList): Observable<TaskList[]> {
-    return this.http.delete<TaskList[]>(
+  public delete(taskList: ITaskList): Observable<ITaskList[]> {
+    return this.http.delete<ITaskList[]>(
       `${this.taskListUrl}/${taskList._id}`,
-      httpOptions
+      httpOptions,
     );
   }
 }

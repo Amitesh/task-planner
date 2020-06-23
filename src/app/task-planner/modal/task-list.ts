@@ -1,10 +1,10 @@
-import { Task } from "./task";
+import { ITask } from './task';
 
 /**
  * Task list is collection of corresponding list's tasks.
  */
-export interface TaskList {
+export interface ITaskList {
   _id?: string;
   name: string;
-  tasks?: Array<Task>;
+  tasks?: Array<ITask>;
 }

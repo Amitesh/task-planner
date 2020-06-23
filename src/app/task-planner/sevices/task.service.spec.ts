@@ -1,18 +1,19 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
-} from "@angular/common/http/testing";
-import { TestBed } from "@angular/core/testing";
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { TaskService } from "./task.service";
-import { Task } from "../modal/task";
-import { TaskList } from "../modal/task-list";
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 
-describe("TaskService", () => {
+import { ITask } from '../modal/task';
+import { ITaskList } from '../modal/task-list';
+import { TaskService } from './task.service';
+
+describe('TaskService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let taskService: TaskService;
-  let mockTaskList: TaskList;
+  let mockTaskList: ITaskList;
   let apiUrl;
 
   beforeEach(() => {
@@ -26,16 +27,16 @@ describe("TaskService", () => {
     taskService = TestBed.inject(TaskService);
 
     mockTaskList = {
-      _id: "1",
-      name: "Todo",
+      _id: '1',
+      name: 'Todo',
       tasks: [
         {
-          _id: "1",
-          name: "task11",
+          _id: '1',
+          name: 'task11',
         },
         {
-          _id: "11",
-          name: "task12",
+          _id: '11',
+          name: 'task12',
         },
       ],
     };
@@ -47,34 +48,33 @@ describe("TaskService", () => {
     httpTestingController.verify();
   });
 
-  describe("be able to retrieve tasklist from the api", () => {
+  describe('be able to retrieve tasklist from the api', () => {
     beforeEach(() => {
       taskService = TestBed.inject(TaskService);
     });
 
-    it("should return expected task list (called once)", () => {
+    it('should return expected task list (called once)', () => {
       taskService
         .get(mockTaskList._id)
         .subscribe(
           (tasks) =>
             expect(tasks).toEqual(
               mockTaskList.tasks,
-              "should return expected task lists"
+              'should return expected task lists',
             ),
-          fail
-        );
+          fail);
 
       // taskService should have made one request to GET task lists from expected URL
       const req = httpTestingController.expectOne(apiUrl);
-      expect(req.request.method).toEqual("GET");
+      expect(req.request.method).toEqual('GET');
 
       // Respond with the mock taskLists
       req.flush(mockTaskList.tasks);
     });
 
-    it("should be OK returning no task lists", () => {
+    it('should be OK returning no task lists', () => {
       taskService.get(mockTaskList._id).subscribe((tasks) => {
-        expect(tasks.length).toEqual(0, "should have empty tasks array");
+        expect(tasks.length).toEqual(0, 'should have empty tasks array');
       }, fail);
 
       const req = httpTestingController.expectOne(apiUrl);
@@ -82,27 +82,27 @@ describe("TaskService", () => {
     });
 
     // This service reports the error but finds a way to let the app keep going.
-    it("should turn 404 into an empty taskLists result", () => {
+    it('should turn 404 into an empty taskLists result', () => {
       taskService.get(mockTaskList._id).subscribe(
         (tasks) => {
           expect(tasks.length).toEqual(
             0,
-            "should return empty taskLists array"
+            'should return empty taskLists array',
           );
         },
         (error) => {
           expect(error.status).toEqual(404);
-        }
+        },
       );
 
       const req = httpTestingController.expectOne(apiUrl);
 
       // respond with a 404 and the error message in the body
-      const msg = "deliberate 404 error";
-      req.flush(msg, { status: 404, statusText: "Not Found" });
+      const msg = 'deliberate 404 error';
+      req.flush(msg, { status: 404, statusText: 'Not Found' });
     });
 
-    it("should return expected tasks (called multiple times)", () => {
+    it('should return expected tasks (called multiple times)', () => {
       taskService.get(mockTaskList._id).subscribe();
       taskService.get(mockTaskList._id).subscribe();
       taskService
@@ -111,13 +111,12 @@ describe("TaskService", () => {
           (tasks) =>
             expect(tasks).toEqual(
               mockTaskList.tasks,
-              "should return expected taskLists"
+              'should return expected taskLists',
             ),
-          fail
-        );
+          fail);
 
       const requests = httpTestingController.match(apiUrl);
-      expect(requests.length).toEqual(3, "calls to task lists ()");
+      expect(requests.length).toEqual(3, 'calls to task lists ()');
 
       requests[0].flush([]);
       requests[1].flush(mockTaskList.tasks);
@@ -125,107 +124,107 @@ describe("TaskService", () => {
     });
   });
 
-  describe("be able to create and update task", () => {
+  describe('be able to create and update task', () => {
     // Expecting the query form of URL so should not 404 when id not found
-    it("should create a task", () => {
-      const newTask: Task = {
-        name: "Task 13",
+    it('should create a task', () => {
+      const newTask: ITask = {
+        name: 'Task 13',
       };
 
       const newTaskList = Object.assign(mockTaskList);
       newTaskList.tasks = [...mockTaskList.tasks, newTask];
 
       taskService.post(mockTaskList._id, newTask).subscribe((data) => {
-        expect(data).toEqual(newTaskList, "should return the task");
+        expect(data).toEqual(newTaskList, 'should return the task');
       }, fail);
 
       const req = httpTestingController.expectOne(apiUrl);
 
-      expect(req.request.method).toEqual("POST");
+      expect(req.request.method).toEqual('POST');
 
       const expectedResponse = new HttpResponse({
-        status: 204,
-        statusText: "OK",
         body: newTaskList,
+        status: 204,
+        statusText: 'OK',
       });
 
       req.event(expectedResponse);
     });
 
-    it("should update a task", () => {
+    it('should update a task', () => {
       const oldTask = mockTaskList.tasks[0];
-      const updatedTask: Task = Object.assign(oldTask);
-      updatedTask.name = "Updated task";
+      const updatedTask: ITask = Object.assign(oldTask);
+      updatedTask.name = 'Updated task';
 
-      let updatedTaskList = Object.assign(mockTaskList);
+      const updatedTaskList = Object.assign(mockTaskList);
       updatedTaskList.tasks[0] = updatedTask;
 
       taskService.put(mockTaskList._id, updatedTask).subscribe((data) => {
-        expect(data).toEqual(updatedTaskList, " should return the task list");
+        expect(data).toEqual(updatedTaskList, ' should return the task list');
       }, fail);
 
       const req = httpTestingController.expectOne(
-        `${apiUrl}/${updatedTask._id}`
+        `${apiUrl}/${updatedTask._id}`,
       );
-      expect(req.request.method).toEqual("PUT");
+      expect(req.request.method).toEqual('PUT');
 
       const expectedResponse = new HttpResponse({
-        status: 204,
-        statusText: "OK",
         body: updatedTaskList,
+        status: 204,
+        statusText: 'OK',
       });
       req.event(expectedResponse);
     });
 
     // This service reports the error but finds a way to let the app keep going.
-    it("should turn 404 error into return of the update task", () => {
+    it('should turn 404 error into return of the update task', () => {
       const oldTask = mockTaskList.tasks[0];
-      const updatedTask: Task = Object.assign(oldTask);
-      updatedTask.name = "Updated task";
+      const updatedTask: ITask = Object.assign(oldTask);
+      updatedTask.name = 'Updated task';
 
-      let updatedTaskList = Object.assign(mockTaskList);
+      const updatedTaskList = Object.assign(mockTaskList);
       updatedTaskList.tasks[0] = updatedTask;
 
       taskService.put(mockTaskList._id, updatedTask).subscribe(
         (data) =>
           expect(data).toEqual(
             updatedTaskList,
-            "should return the update task list"
+            'should return the update task list',
           ),
         (error) => {
           expect(error.status).toEqual(404);
-        }
+        },
       );
 
       const req = httpTestingController.expectOne(
-        `${apiUrl}/${updatedTask._id}`
+        `${apiUrl}/${updatedTask._id}`,
       );
 
       // respond with a 404 and the error message in the body
-      const msg = "deliberate 404 error";
-      req.flush(msg, { status: 404, statusText: "Not Found" });
+      const msg = 'deliberate 404 error';
+      req.flush(msg, { status: 404, statusText: 'Not Found' });
     });
   });
 
-  describe("be able to delete task", () => {
+  describe('be able to delete task', () => {
     // Expecting the query form of URL so should not 404 when id not found
-    it("should delete a task", () => {
-      let modifiedTaskList = Object.assign(mockTaskList);
+    it('should delete a task', () => {
+      const modifiedTaskList = Object.assign(mockTaskList);
       const taskToDelete = modifiedTaskList.tasks.splice(1, 1)[0];
 
       taskService.delete(mockTaskList._id, taskToDelete).subscribe((data) => {
-        expect(data).toEqual(modifiedTaskList, "should return the task list");
+        expect(data).toEqual(modifiedTaskList, 'should return the task list');
       }, fail);
 
       const req = httpTestingController.expectOne(
-        `${apiUrl}/${taskToDelete._id}`
+        `${apiUrl}/${taskToDelete._id}`,
       );
-      expect(req.request.method).toEqual("DELETE");
+      expect(req.request.method).toEqual('DELETE');
 
       const expectedResponse = new HttpResponse({
-        status: 200,
-        statusText: "OK",
         body: modifiedTaskList,
+        status: 200,
+        statusText: 'OK',
       });
       req.event(expectedResponse);
     });

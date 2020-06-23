@@ -1,50 +1,51 @@
 import {
-  ComponentFixture,
-  TestBed,
   async,
+  ComponentFixture,
   fakeAsync,
+  TestBed,
   tick,
-} from "@angular/core/testing";
-import { Observable, defer } from "rxjs";
-import { NgbModal, NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { TaskPlannerComponent } from "./task-planner.component";
-import { TaskListService } from "./sevices/task-list.service";
-import { TaskList } from "./modal/task-list";
+} from '@angular/core/testing';
+import { NgbModal, NgbModalOptions, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { defer, Observable } from 'rxjs';
+
+import { ITaskList } from './modal/task-list';
+import { TaskListService } from './sevices/task-list.service';
+import { TaskPlannerComponent } from './task-planner.component';
 
 class MockTaskListService {
-  taskLists: TaskList[] = [];
-  get(): Observable<TaskList[]> {
+  public taskLists: ITaskList[] = [];
+  public get(): Observable<ITaskList[]> {
     return defer(() => Promise.resolve(this.taskLists));
   }
-  post(taskList: TaskList): Observable<TaskList[]> {
+  public post(taskList: ITaskList): Observable<ITaskList[]> {
     return defer(() => Promise.resolve([taskList]));
   }
-  delete(taskList: TaskList): Observable<TaskList[]> {
+  public delete(taskList: ITaskList): Observable<ITaskList[]> {
     return defer(() => Promise.resolve([]));
   }
 }
 
 class MockDialogService {
-  open() {
+  public open(content: any, options?: NgbModalOptions) {
     return {
       componentInstance: {
-        title: "some title",
-        onSubmit: {
-          subscribe: (cb: Function) => {
-            cb.call(null, "Task1111");
-          },
-        },
-        onDelete: {
-          subscribe: (cb: Function) => {
+        isDelete: {
+          subscribe: (cb) => {
             cb.call(null, true);
           },
         },
+        submit: {
+          subscribe: (cb) => {
+            cb.call(null, 'Task1111');
+          },
+        },
+        title: 'some title',
       },
     };
   }
 }
 
-describe("TaskPlannerComponent", () => {
+describe('TaskPlannerComponent', () => {
   let component: TaskPlannerComponent;
   let taskListService: TaskListService;
 
@@ -60,15 +61,15 @@ describe("TaskPlannerComponent", () => {
     taskListService = TestBed.inject(TaskListService);
   });
 
-  it("should create the Task Planner component", () => {
+  it('should create the Task Planner component', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should create empty task lists", () => {
+  it('should create empty task lists', () => {
     expect(component.taskLists).not.toBeUndefined();
   });
 
-  it("should return taskLists on ngOnInit()", () => {
+  it('should return taskLists on ngOnInit()', () => {
     component.ngOnInit();
     taskListService
       .get()
@@ -76,14 +77,13 @@ describe("TaskPlannerComponent", () => {
         (taskLists) =>
           expect(component.taskLists).toEqual(
             taskLists,
-            "should return expected task lists"
+            'should return expected task lists',
           ),
-        fail
-      );
+        fail);
   });
 });
 
-describe("TaskPlannerComponent AddList and DeleteList", () => {
+describe('TaskPlannerComponent AddList and DeleteList', () => {
   let component: TaskPlannerComponent;
   let fixture: ComponentFixture<TaskPlannerComponent>;
   let dialog: MockDialogService;
@@ -91,8 +91,8 @@ describe("TaskPlannerComponent AddList and DeleteList", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NgbModule],
       declarations: [TaskPlannerComponent],
+      imports: [NgbModule],
       providers: [
         TaskPlannerComponent,
         { provide: TaskListService, useClass: MockTaskListService },
@@ -100,21 +100,21 @@ describe("TaskPlannerComponent AddList and DeleteList", () => {
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(TaskPlannerComponent);
-    dialog = TestBed.get(NgbModal);
+    dialog = TestBed.inject(NgbModal);
     taskListService = TestBed.inject(TaskListService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
-  it("should open add task list dialog", fakeAsync(() => {
+  it('should open add task list dialog', fakeAsync(() => {
     const addListButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector(
-      "#tasklist-add-button"
+      '#tasklist-add-button',
     );
-    spyOn(component, "addList").and.callThrough();
-    spyOn(dialog, "open").and.callThrough();
-    spyOn(taskListService, "post").and.callThrough();
+    spyOn(component, 'addList').and.callThrough();
+    spyOn(dialog, 'open').and.callThrough();
+    spyOn(taskListService, 'post').and.callThrough();
 
-    addListButton.dispatchEvent(new Event("click"));
+    addListButton.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     tick(250);
     expect(component.addList).toHaveBeenCalled();
@@ -122,30 +122,30 @@ describe("TaskPlannerComponent AddList and DeleteList", () => {
     expect(taskListService.post).toHaveBeenCalled();
   }));
 
-  it("should add new task list", fakeAsync(() => {
+  it('should add new task list', fakeAsync(() => {
     const addListButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector(
-      "#tasklist-add-button"
+      '#tasklist-add-button',
     );
-    const taskLists = [{ name: "Task1111" }];
+    const taskLists = [{ name: 'Task1111' }];
 
-    addListButton.dispatchEvent(new Event("click"));
+    addListButton.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     tick(50);
     expect(component.taskLists).toEqual(
       taskLists,
-      "should return expected taskLists"
+      'should return expected taskLists',
     );
   }));
 
-  it("should delete task list", fakeAsync(() => {
-    const taskLists = [{ _id: "1", name: "Task1111" }];
+  it('should delete task list', fakeAsync(() => {
+    const taskLists = [{ _id: '1', name: 'Task1111' }];
     component.taskLists = taskLists;
     fixture.detectChanges();
     const deleteListButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector(
-      ".delete-icon"
+      '.delete-icon',
     );
     expect(component.taskLists.length).toBe(1);
-    deleteListButton.dispatchEvent(new Event("click"));
+    deleteListButton.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     tick(50);
     expect(component.taskLists.length).toBe(0);
