@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { EnvironmentService } from 'src/app/services/environment.service';
+import { IMoveEvent } from '../modal/moveevent';
 import { ITaskList } from '../modal/task-list';
 
 /**
@@ -59,5 +60,31 @@ export class TaskListService {
       `${this.taskListUrl}/${taskList._id}`,
       httpOptions,
     );
+  }
+
+  /**
+   * Method to move the dragged item to back to original list if there is any error.
+   * @param taskLists: Object
+   * @param event: Object
+   */
+  public move(taskLists: ITaskList[], event: IMoveEvent) {
+    const fromTaskList = (taskLists || []).find((taskList) => {
+      return taskList._id === event.fromTaskListId;
+    });
+
+    const toTaskList = (taskLists || []).find((taskList) => {
+      return taskList._id === event.toTaskListId;
+    });
+
+    const task = ((toTaskList && toTaskList.tasks) || []).find((item) => {
+      return item._id === event.taskId;
+    });
+
+    if (task) {
+      // Revove the task from new list
+      toTaskList.tasks.splice(event.newIndex, 1);
+      // Add task to old list
+      fromTaskList.tasks.splice(event.oldIndex, 0, task);
+    }
   }
 }

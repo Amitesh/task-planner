@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"tasks\">\r\n  <div class=\"sortable\" [class.empty]=\"tasks.length === 0\" [sortablejs]=\"tasks\" [sortablejsOptions]=\"sortableOptions\">\r\n    <div class=\"card\" *ngFor=\"let task of tasks\" [attr.data-id]=\"task._id\">\r\n      <div tabindex=\"0\" [attr.aria-label]=\"task.name\" class=\"card-content\">\r\n        <span class=\"truncate\" title=\"{{ task.name }}\">{{ task.name }}</span>\r\n        <span class=\"clearfix\"><a href=\"#\" class=\"task-delete delete-icon\" (click)=\"onDelete(task)\"><i\r\n              class=\"fas fa-trash\"></i></a></span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a href=\"#\" class=\"add-task-btn\" (click)=\"addTask()\">Add task</a>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"tasks\">\r\n  <div class=\"sortable\" [attr.data-id]=\"taskList._id\" [class.empty]=\"tasks.length === 0\" [sortablejs]=\"tasks\" [sortablejsOptions]=\"sortableOptions\">\r\n    <div class=\"card\" *ngFor=\"let task of tasks\" [attr.data-id]=\"task._id\" [attr.data-task]=\"taskStringfy(task)\">\r\n      <div tabindex=\"0\" [attr.aria-label]=\"task.name\" class=\"card-content\">\r\n        <span class=\"truncate\" title=\"{{ task.name }}\">{{ task.name }}</span>\r\n        <span class=\"clearfix\"><a href=\"#\" class=\"task-delete delete-icon\" (click)=\"onDelete(task)\"><i\r\n              class=\"fas fa-trash\"></i></a></span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a href=\"#\" class=\"add-task-btn\" (click)=\"addTask()\">Add task</a>\r\n</div>");
 
 /***/ }),
 
@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"task-planner\">\r\n  <div class=\"header\">\r\n    <h3 class=\"title\"><i class=\"fas fa-tasks\"></i> Task Planner</h3>\r\n    <a href=\"#\" id=\"tasklist-add-button\" class=\"add-list\" (click)=\"addList()\">Add List</a>\r\n  </div>\r\n\r\n  <div class=\"task-board clearfix\">\r\n    <div class=\"lists\" [class.empty]=\"taskLists.length === 0\">\r\n      <div class=\"list\" *ngFor=\"let tasklist of taskLists\">\r\n        <div class=\"clearfix\">\r\n          <span tabindex=\"0\" [attr.aria-label]=\"tasklist.name\">\r\n            <h5 class=\"truncate\" title=\"{{ tasklist.name }}\">\r\n              {{ tasklist.name }}\r\n            </h5>\r\n          </span>\r\n          <a href=\"#\" class=\"delete-icon\" (click)=\"deleteTaskList(tasklist)\">\r\n            <i class=\"fas fa-trash danger\"></i>\r\n          </a>\r\n        </div>\r\n        <task-list [taskList]=\"tasklist\"></task-list>\r\n      </div>\r\n      <div class=\"empty-tasklist\">\r\n        <h4>Welcome to your task planner board! <i class=\"fas fa-rocket\"></i></h4>\r\n        To add new task list click 'Add list' link above.\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"hints\" *ngIf=\"taskLists.length !== 0\">\r\n    <h6>Hints</h6>\r\n    <ul>\r\n      <li>Empty task list and task name is not allowed.</li>\r\n      <li>Duplicate task list and task name is allowed.</li>\r\n      <li>Task order is not maintained yet.</li>\r\n      <li>Drop the task in highlighted drop zone area between <br>Task list name and Add task link.</li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"task-planner\">\r\n  <div class=\"header\">\r\n    <h3 class=\"title\"><i class=\"fas fa-tasks\"></i> Task Planner</h3>\r\n    <a href=\"#\" id=\"tasklist-add-button\" class=\"add-list\" (click)=\"addList()\">Add List</a>\r\n  </div>\r\n\r\n  <div class=\"task-board clearfix\">\r\n    <div class=\"lists\" [class.empty]=\"taskLists.length === 0\">\r\n      <div class=\"list\" *ngFor=\"let tasklist of taskLists\">\r\n        <div class=\"clearfix\">\r\n          <span tabindex=\"0\" [attr.aria-label]=\"tasklist.name\">\r\n            <h5 class=\"truncate\" title=\"{{ tasklist.name }}\">\r\n              {{ tasklist.name }}\r\n            </h5>\r\n          </span>\r\n          <a href=\"#\" class=\"delete-icon\" (click)=\"deleteTaskList(tasklist)\">\r\n            <i class=\"fas fa-trash danger\"></i>\r\n          </a>\r\n        </div>\r\n        <task-list [taskList]=\"tasklist\" (errorOnMove)=\"errorOnMove($event)\"></task-list>\r\n      </div>\r\n      <div class=\"empty-tasklist\">\r\n        <h4>Welcome to your task planner board! <i class=\"fas fa-rocket\"></i></h4>\r\n        To add new task list click 'Add list' link above.\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"hints\" *ngIf=\"taskLists.length !== 0\">\r\n    <h6>Hints</h6>\r\n    <ul>\r\n      <li>Empty task list and task name is not allowed.</li>\r\n      <li>Duplicate task list and task name is allowed.</li>\r\n      <li>Task order is not maintained yet.</li>\r\n      <li>Drop the task in highlighted drop zone area between <br>Task list name and Add task link.</li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -487,6 +487,28 @@ let TaskListService = class TaskListService {
     delete(taskList) {
         return this.http.delete(`${this.taskListUrl}/${taskList._id}`, httpOptions);
     }
+    /**
+     * Method to move the dragged item to back to original list if there is any error.
+     * @param taskLists: Object
+     * @param event: Object
+     */
+    move(taskLists, event) {
+        const fromTaskList = (taskLists || []).find((taskList) => {
+            return taskList._id === event.fromTaskListId;
+        });
+        const toTaskList = (taskLists || []).find((taskList) => {
+            return taskList._id === event.toTaskListId;
+        });
+        const task = ((toTaskList && toTaskList.tasks) || []).find((item) => {
+            return item._id === event.taskId;
+        });
+        if (task) {
+            // Revove the task from new list
+            toTaskList.tasks.splice(event.newIndex, 1);
+            // Add task to old list
+            fromTaskList.tasks.splice(event.oldIndex, 0, task);
+        }
+    }
 };
 TaskListService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
@@ -618,6 +640,7 @@ let TaskListComponent = class TaskListComponent {
     constructor(dialogService, taskService) {
         this.dialogService = dialogService;
         this.taskService = taskService;
+        this.errorOnMove = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         /**
          * Set Sortablejs configuration for group name and callbacks
          */
@@ -640,13 +663,23 @@ let TaskListComponent = class TaskListComponent {
      */
     onAddTaskByDragAndDrop(event) {
         let toTaskListId;
+        let fromTaskListId;
         let task;
         try {
             toTaskListId = this.taskList._id;
             task = this.tasks[event.newIndex];
+            fromTaskListId = event.from.getAttribute('data-id');
             this.taskService
                 .post(toTaskListId, task)
-                .subscribe((taskList) => { });
+                .subscribe((taskList) => { }, (err) => {
+                this.errorOnMove.emit({
+                    fromTaskListId,
+                    newIndex: event.newIndex,
+                    oldIndex: event.oldIndex,
+                    taskId: task._id,
+                    toTaskListId,
+                });
+            });
         }
         catch (error) {
             console.error(error);
@@ -658,17 +691,31 @@ let TaskListComponent = class TaskListComponent {
      */
     onRemoveTaskByDragAndDrop(event) {
         let fromTaskListId;
+        let toTaskListId;
         let taskId;
         try {
             fromTaskListId = this.taskList._id;
             taskId = event.item.getAttribute('data-id');
+            toTaskListId = event.to.getAttribute('data-id');
             this.taskService
                 .delete(fromTaskListId, { _id: taskId, name: null })
-                .subscribe((taskList) => { });
+                .subscribe((taskList) => { }, (err) => {
+                // let task = <ITask>JSON.parse(event.item.getAttribute('data-task'));
+                this.errorOnMove.emit({
+                    fromTaskListId,
+                    newIndex: event.newIndex,
+                    oldIndex: event.oldIndex,
+                    taskId,
+                    toTaskListId,
+                });
+            });
         }
         catch (error) {
             console.error(error);
         }
+    }
+    taskStringfy(task) {
+        return JSON.stringify(task);
     }
     /**
      * Open a popup to add a new task to selected task list.
@@ -725,6 +772,9 @@ TaskListComponent.ctorParameters = () => [
 Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], TaskListComponent.prototype, "taskList", void 0);
+Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], TaskListComponent.prototype, "errorOnMove", void 0);
 TaskListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'task-list',
@@ -822,6 +872,9 @@ let TaskPlannerComponent = class TaskPlannerComponent {
                 });
             }
         });
+    }
+    errorOnMove(event) {
+        this.taskListService.move(this.taskLists, event);
     }
 };
 TaskPlannerComponent.ctorParameters = () => [

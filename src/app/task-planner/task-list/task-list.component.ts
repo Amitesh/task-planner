@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { SortablejsOptions } from 'ngx-sortablejs';
 import { Options } from 'sortablejs';
 
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialogs/confirm-dialog.component';
 import { InputDialogComponent } from '../dialogs/input-dialogs/input-dialog.component';
+import { IMoveEvent } from '../modal/moveevent';
 import { ITask } from '../modal/task';
 import { ITaskList } from '../modal/task-list';
 import { TaskService } from '../sevices/task.service';
@@ -20,6 +20,8 @@ import { TaskService } from '../sevices/task.service';
 export class TaskListComponent implements OnInit {
   // Task list to hold the all tasks and it's properties
   @Input() public taskList: ITaskList;
+  @Output() public errorOnMove = new EventEmitter<IMoveEvent>();
+
   private tasks: ITask[];
 
   /**
@@ -50,13 +52,24 @@ export class TaskListComponent implements OnInit {
    */
   private onAddTaskByDragAndDrop(event: any) {
     let toTaskListId: string;
+    let fromTaskListId: string;
     let task: ITask;
     try {
       toTaskListId = this.taskList._id;
       task = this.tasks[event.newIndex];
+      fromTaskListId = event.from.getAttribute('data-id');
       this.taskService
         .post(toTaskListId, task)
-        .subscribe((taskList: ITaskList) => { });
+        .subscribe((taskList: ITaskList) => { },
+          (err) => {
+            this.errorOnMove.emit({
+              fromTaskListId,
+              newIndex: event.newIndex,
+              oldIndex: event.oldIndex,
+              taskId: task._id,
+              toTaskListId,
+            } as IMoveEvent);
+          });
     } catch (error) {
       console.error(error);
     }
@@ -68,17 +81,33 @@ export class TaskListComponent implements OnInit {
    */
   private onRemoveTaskByDragAndDrop(event: any) {
     let fromTaskListId: string;
+    let toTaskListId: string;
     let taskId: string;
     try {
       fromTaskListId = this.taskList._id;
       taskId = event.item.getAttribute('data-id');
+      toTaskListId = event.to.getAttribute('data-id');
 
       this.taskService
         .delete(fromTaskListId, { _id: taskId, name: null })
-        .subscribe((taskList: ITaskList) => { });
+        .subscribe((taskList: ITaskList) => { },
+          (err) => {
+            // let task = <ITask>JSON.parse(event.item.getAttribute('data-task'));
+            this.errorOnMove.emit({
+              fromTaskListId,
+              newIndex: event.newIndex,
+              oldIndex: event.oldIndex,
+              taskId,
+              toTaskListId,
+            } as IMoveEvent);
+          });
     } catch (error) {
       console.error(error);
     }
+  }
+
+  public taskStringfy(task: ITask) {
+    return JSON.stringify(task);
   }
 
   /**

@@ -81,7 +81,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"tasks\">\r\n  <div class=\"sortable\" [class.empty]=\"tasks.length === 0\" [sortablejs]=\"tasks\" [sortablejsOptions]=\"sortableOptions\">\r\n    <div class=\"card\" *ngFor=\"let task of tasks\" [attr.data-id]=\"task._id\">\r\n      <div tabindex=\"0\" [attr.aria-label]=\"task.name\" class=\"card-content\">\r\n        <span class=\"truncate\" title=\"{{ task.name }}\">{{ task.name }}</span>\r\n        <span class=\"clearfix\"><a href=\"#\" class=\"task-delete delete-icon\" (click)=\"onDelete(task)\"><i\r\n              class=\"fas fa-trash\"></i></a></span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a href=\"#\" class=\"add-task-btn\" (click)=\"addTask()\">Add task</a>\r\n</div>";
+    __webpack_exports__["default"] = "<div class=\"tasks\">\r\n  <div class=\"sortable\" [attr.data-id]=\"taskList._id\" [class.empty]=\"tasks.length === 0\" [sortablejs]=\"tasks\" [sortablejsOptions]=\"sortableOptions\">\r\n    <div class=\"card\" *ngFor=\"let task of tasks\" [attr.data-id]=\"task._id\" [attr.data-task]=\"taskStringfy(task)\">\r\n      <div tabindex=\"0\" [attr.aria-label]=\"task.name\" class=\"card-content\">\r\n        <span class=\"truncate\" title=\"{{ task.name }}\">{{ task.name }}</span>\r\n        <span class=\"clearfix\"><a href=\"#\" class=\"task-delete delete-icon\" (click)=\"onDelete(task)\"><i\r\n              class=\"fas fa-trash\"></i></a></span>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a href=\"#\" class=\"add-task-btn\" (click)=\"addTask()\">Add task</a>\r\n</div>";
     /***/
   },
 
@@ -101,7 +101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"task-planner\">\r\n  <div class=\"header\">\r\n    <h3 class=\"title\"><i class=\"fas fa-tasks\"></i> Task Planner</h3>\r\n    <a href=\"#\" id=\"tasklist-add-button\" class=\"add-list\" (click)=\"addList()\">Add List</a>\r\n  </div>\r\n\r\n  <div class=\"task-board clearfix\">\r\n    <div class=\"lists\" [class.empty]=\"taskLists.length === 0\">\r\n      <div class=\"list\" *ngFor=\"let tasklist of taskLists\">\r\n        <div class=\"clearfix\">\r\n          <span tabindex=\"0\" [attr.aria-label]=\"tasklist.name\">\r\n            <h5 class=\"truncate\" title=\"{{ tasklist.name }}\">\r\n              {{ tasklist.name }}\r\n            </h5>\r\n          </span>\r\n          <a href=\"#\" class=\"delete-icon\" (click)=\"deleteTaskList(tasklist)\">\r\n            <i class=\"fas fa-trash danger\"></i>\r\n          </a>\r\n        </div>\r\n        <task-list [taskList]=\"tasklist\"></task-list>\r\n      </div>\r\n      <div class=\"empty-tasklist\">\r\n        <h4>Welcome to your task planner board! <i class=\"fas fa-rocket\"></i></h4>\r\n        To add new task list click 'Add list' link above.\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"hints\" *ngIf=\"taskLists.length !== 0\">\r\n    <h6>Hints</h6>\r\n    <ul>\r\n      <li>Empty task list and task name is not allowed.</li>\r\n      <li>Duplicate task list and task name is allowed.</li>\r\n      <li>Task order is not maintained yet.</li>\r\n      <li>Drop the task in highlighted drop zone area between <br>Task list name and Add task link.</li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<div class=\"task-planner\">\r\n  <div class=\"header\">\r\n    <h3 class=\"title\"><i class=\"fas fa-tasks\"></i> Task Planner</h3>\r\n    <a href=\"#\" id=\"tasklist-add-button\" class=\"add-list\" (click)=\"addList()\">Add List</a>\r\n  </div>\r\n\r\n  <div class=\"task-board clearfix\">\r\n    <div class=\"lists\" [class.empty]=\"taskLists.length === 0\">\r\n      <div class=\"list\" *ngFor=\"let tasklist of taskLists\">\r\n        <div class=\"clearfix\">\r\n          <span tabindex=\"0\" [attr.aria-label]=\"tasklist.name\">\r\n            <h5 class=\"truncate\" title=\"{{ tasklist.name }}\">\r\n              {{ tasklist.name }}\r\n            </h5>\r\n          </span>\r\n          <a href=\"#\" class=\"delete-icon\" (click)=\"deleteTaskList(tasklist)\">\r\n            <i class=\"fas fa-trash danger\"></i>\r\n          </a>\r\n        </div>\r\n        <task-list [taskList]=\"tasklist\" (errorOnMove)=\"errorOnMove($event)\"></task-list>\r\n      </div>\r\n      <div class=\"empty-tasklist\">\r\n        <h4>Welcome to your task planner board! <i class=\"fas fa-rocket\"></i></h4>\r\n        To add new task list click 'Add list' link above.\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"hints\" *ngIf=\"taskLists.length !== 0\">\r\n    <h6>Hints</h6>\r\n    <ul>\r\n      <li>Empty task list and task name is not allowed.</li>\r\n      <li>Duplicate task list and task name is allowed.</li>\r\n      <li>Task order is not maintained yet.</li>\r\n      <li>Drop the task in highlighted drop zone area between <br>Task list name and Add task link.</li>\r\n    </ul>\r\n  </div>\r\n</div>\r\n";
     /***/
   },
 
@@ -793,6 +793,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function _delete(taskList) {
           return this.http["delete"]("".concat(this.taskListUrl, "/").concat(taskList._id), httpOptions);
         }
+        /**
+         * Method to move the dragged item to back to original list if there is any error.
+         * @param taskLists: Object
+         * @param event: Object
+         */
+
+      }, {
+        key: "move",
+        value: function move(taskLists, event) {
+          var fromTaskList = (taskLists || []).find(function (taskList) {
+            return taskList._id === event.fromTaskListId;
+          });
+          var toTaskList = (taskLists || []).find(function (taskList) {
+            return taskList._id === event.toTaskListId;
+          });
+          var task = (toTaskList && toTaskList.tasks || []).find(function (item) {
+            return item._id === event.taskId;
+          });
+
+          if (task) {
+            // Revove the task from new list
+            toTaskList.tasks.splice(event.newIndex, 1); // Add task to old list
+
+            fromTaskList.tasks.splice(event.oldIndex, 0, task);
+          }
+        }
       }]);
 
       return TaskListService;
@@ -1021,6 +1047,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.dialogService = dialogService;
         this.taskService = taskService;
+        this.errorOnMove = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         /**
          * Set Sortablejs configuration for group name and callbacks
          */
@@ -1049,13 +1076,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onAddTaskByDragAndDrop",
         value: function onAddTaskByDragAndDrop(event) {
+          var _this2 = this;
+
           var toTaskListId;
+          var fromTaskListId;
           var task;
 
           try {
             toTaskListId = this.taskList._id;
             task = this.tasks[event.newIndex];
-            this.taskService.post(toTaskListId, task).subscribe(function (taskList) {});
+            fromTaskListId = event.from.getAttribute('data-id');
+            this.taskService.post(toTaskListId, task).subscribe(function (taskList) {}, function (err) {
+              _this2.errorOnMove.emit({
+                fromTaskListId: fromTaskListId,
+                newIndex: event.newIndex,
+                oldIndex: event.oldIndex,
+                taskId: task._id,
+                toTaskListId: toTaskListId
+              });
+            });
           } catch (error) {
             console.error(error);
           }
@@ -1068,19 +1107,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onRemoveTaskByDragAndDrop",
         value: function onRemoveTaskByDragAndDrop(event) {
+          var _this3 = this;
+
           var fromTaskListId;
+          var toTaskListId;
           var taskId;
 
           try {
             fromTaskListId = this.taskList._id;
             taskId = event.item.getAttribute('data-id');
+            toTaskListId = event.to.getAttribute('data-id');
             this.taskService["delete"](fromTaskListId, {
               _id: taskId,
               name: null
-            }).subscribe(function (taskList) {});
+            }).subscribe(function (taskList) {}, function (err) {
+              // let task = <ITask>JSON.parse(event.item.getAttribute('data-task'));
+              _this3.errorOnMove.emit({
+                fromTaskListId: fromTaskListId,
+                newIndex: event.newIndex,
+                oldIndex: event.oldIndex,
+                taskId: taskId,
+                toTaskListId: toTaskListId
+              });
+            });
           } catch (error) {
             console.error(error);
           }
+        }
+      }, {
+        key: "taskStringfy",
+        value: function taskStringfy(task) {
+          return JSON.stringify(task);
         }
         /**
          * Open a popup to add a new task to selected task list.
@@ -1089,7 +1146,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "addTask",
         value: function addTask() {
-          var _this2 = this;
+          var _this4 = this;
 
           var dialogObj = this.dialogService.open(_dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_4__["InputDialogComponent"], {
             backdrop: 'static'
@@ -1097,11 +1154,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           dialogObj.componentInstance.title = 'Add new task';
           dialogObj.componentInstance.submit.subscribe(function (taskName) {
             try {
-              _this2.taskService.post(_this2.taskList._id, {
+              _this4.taskService.post(_this4.taskList._id, {
                 name: taskName
               }).subscribe(function (taskList) {
-                _this2.taskList = taskList;
-                _this2.tasks = _this2.taskList.tasks;
+                _this4.taskList = taskList;
+                _this4.tasks = _this4.taskList.tasks;
               });
             } catch (error) {
               console.error(error);
@@ -1116,7 +1173,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onDelete",
         value: function onDelete(taskToDelete) {
-          var _this3 = this;
+          var _this5 = this;
 
           var dialogObj = this.dialogService.open(_dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_3__["ConfirmDialogComponent"], {
             backdrop: 'static'
@@ -1125,9 +1182,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           dialogObj.componentInstance.isDelete.subscribe(function (deleteTask) {
             try {
               if (deleteTask) {
-                _this3.taskService["delete"](_this3.taskList._id, taskToDelete).subscribe(function (taskList) {
-                  _this3.taskList = taskList;
-                  _this3.tasks = _this3.taskList.tasks;
+                _this5.taskService["delete"](_this5.taskList._id, taskToDelete).subscribe(function (taskList) {
+                  _this5.taskList = taskList;
+                  _this5.tasks = _this5.taskList.tasks;
                 });
               }
             } catch (error) {
@@ -1149,6 +1206,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], TaskListComponent.prototype, "taskList", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()], TaskListComponent.prototype, "errorOnMove", void 0);
     TaskListComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'task-list',
       template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
@@ -1254,11 +1312,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(TaskPlannerComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this4 = this;
+          var _this6 = this;
 
           // fetch the all task lists from the server
           this.taskListService.get().subscribe(function (taskLists) {
-            _this4.taskLists = taskLists;
+            _this6.taskLists = taskLists;
           });
         }
         /**
@@ -1268,17 +1326,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "addList",
         value: function addList() {
-          var _this5 = this;
+          var _this7 = this;
 
           var dialogObj = this.dialogService.open(_dialogs_input_dialogs_input_dialog_component__WEBPACK_IMPORTED_MODULE_4__["InputDialogComponent"], {
             backdrop: 'static'
           });
           dialogObj.componentInstance.title = 'Add new task list';
           dialogObj.componentInstance.submit.subscribe(function (listName) {
-            _this5.taskListService.post({
+            _this7.taskListService.post({
               name: listName
             }).subscribe(function (taskLists) {
-              _this5.taskLists = taskLists;
+              _this7.taskLists = taskLists;
             });
           });
         }
@@ -1290,7 +1348,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "deleteTaskList",
         value: function deleteTaskList(taskListToDelete) {
-          var _this6 = this;
+          var _this8 = this;
 
           var dialogObj = this.dialogService.open(_dialogs_confirm_dialogs_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_3__["ConfirmDialogComponent"], {
             backdrop: 'static'
@@ -1298,11 +1356,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           dialogObj.componentInstance.title = 'Delete task list';
           dialogObj.componentInstance.isDelete.subscribe(function (deleteList) {
             if (deleteList) {
-              _this6.taskListService["delete"](taskListToDelete).subscribe(function (taskLists) {
-                _this6.taskLists = taskLists;
+              _this8.taskListService["delete"](taskListToDelete).subscribe(function (taskLists) {
+                _this8.taskLists = taskLists;
               });
             }
           });
+        }
+      }, {
+        key: "errorOnMove",
+        value: function errorOnMove(event) {
+          this.taskListService.move(this.taskLists, event);
         }
       }]);
 

@@ -70,4 +70,8 @@ export class TaskPlannerComponent implements OnInit {
       }
     });
   }
+
+  public errorOnMove(event) {
+    this.taskListService.move(this.taskLists, event);
+  }
 }
