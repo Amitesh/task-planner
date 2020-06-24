@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { ITask } from '../modal/task';
 import { ITaskList } from '../modal/task-list';
 
@@ -18,9 +19,14 @@ const httpOptions = {
 export class TaskService {
   // TaskList resource api end point. It can be put in a constant config file.
   // public taskListUrl = 'http://localhost:3000/tasks-list';
-  private taskListUrl = '/tasks-list';
+  public taskListUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private environmentService: EnvironmentService,
+  ) {
+    this.taskListUrl = this.environmentService.apiUrl;
+  }
 
   /**
    * API service method to get the all tasks of given tasklist id

@@ -1,8 +1,8 @@
 import { IEnvironment } from '../app/modal/environment';
 
-const apiUrl = '/tasks-list';
+const apiUrl = 'http://mytesturl/tasks-list';
 
 export const environment: IEnvironment = {
-  production: true,
+  production: false,
   apiUrl,
 };

@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { ITask } from '../modal/task';
 import { ITaskList } from '../modal/task-list';
 import { TaskService } from './task.service';
@@ -12,6 +13,7 @@ import { TaskService } from './task.service';
 describe('TaskService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
+  let environmentService: EnvironmentService;
   let taskService: TaskService;
   let mockTaskList: ITaskList;
   let apiUrl;
@@ -25,6 +27,7 @@ describe('TaskService', () => {
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
     taskService = TestBed.inject(TaskService);
+    environmentService = TestBed.inject(EnvironmentService);
 
     mockTaskList = {
       _id: '1',
@@ -51,6 +54,11 @@ describe('TaskService', () => {
   describe('be able to retrieve tasklist from the api', () => {
     beforeEach(() => {
       taskService = TestBed.inject(TaskService);
+    });
+
+    it('should be use test server api url', () => {
+      const url = environmentService.apiUrl;
+      expect(taskService.taskListUrl).toBe(url);
     });
 
     it('should return expected task list (called once)', () => {

@@ -2,8 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
+import { IEnvironment } from '../app/modal/environment';
+
+const apiUrl = 'http://localhost:3000/tasks-list';
+
+export const environment: IEnvironment = {
+  apiUrl,
+  production: true,
 };
 
 /*

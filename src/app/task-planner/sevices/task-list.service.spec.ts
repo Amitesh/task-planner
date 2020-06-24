@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { ITaskList } from '../modal/task-list';
 import { TaskListService } from './task-list.service';
 
@@ -9,6 +10,7 @@ describe('TaskListService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let taskListService: TaskListService;
+  let environmentService: EnvironmentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,6 +21,7 @@ describe('TaskListService', () => {
     httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
     taskListService = TestBed.inject(TaskListService);
+    environmentService = TestBed.inject(EnvironmentService);
   });
 
   afterEach(() => {
@@ -64,6 +67,11 @@ describe('TaskListService', () => {
           ],
         },
       ] as ITaskList[];
+    });
+
+    it('should be use test server api url', () => {
+      const url = environmentService.apiUrl;
+      expect(taskListService.taskListUrl).toBe(url);
     });
 
     it('should return expected task lists (called once)', () => {

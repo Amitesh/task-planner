@@ -250,6 +250,41 @@ AppHttpInterceptor = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "./src/app/services/environment.service.ts":
+/*!*************************************************!*\
+  !*** ./src/app/services/environment.service.ts ***!
+  \*************************************************/
+/*! exports provided: EnvironmentService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EnvironmentService", function() { return EnvironmentService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+
+
+
+let EnvironmentService = class EnvironmentService {
+    constructor() { }
+    get apiUrl() {
+        return _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl;
+    }
+    get production() {
+        return _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].production;
+    }
+};
+EnvironmentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root',
+    })
+], EnvironmentService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/task-planner/dialogs/confirm-dialogs/confirm-dialog.component.scss":
 /*!************************************************************************************!*\
   !*** ./src/app/task-planner/dialogs/confirm-dialogs/confirm-dialog.component.scss ***!
@@ -406,6 +441,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var src_app_services_environment_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/environment.service */ "./src/app/services/environment.service.ts");
+
 
 
 
@@ -418,11 +455,10 @@ const httpOptions = {
     }),
 };
 let TaskListService = class TaskListService {
-    constructor(http) {
+    constructor(http, environmentService) {
         this.http = http;
-        // TaskList resource api end point. It can be put in a constant config file.
-        // public taskListUrl = 'http://localhost:3000/tasks-list';
-        this.taskListUrl = '/tasks-list';
+        this.environmentService = environmentService;
+        this.taskListUrl = this.environmentService.apiUrl;
     }
     /**
      * API service method to get the all task list and it's tasks.
@@ -453,7 +489,8 @@ let TaskListService = class TaskListService {
     }
 };
 TaskListService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
+    { type: src_app_services_environment_service__WEBPACK_IMPORTED_MODULE_3__["EnvironmentService"] }
 ];
 TaskListService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])()
@@ -476,6 +513,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var src_app_services_environment_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/environment.service */ "./src/app/services/environment.service.ts");
+
 
 
 
@@ -488,11 +527,10 @@ const httpOptions = {
     }),
 };
 let TaskService = class TaskService {
-    constructor(http) {
+    constructor(http, environmentService) {
         this.http = http;
-        // TaskList resource api end point. It can be put in a constant config file.
-        // public taskListUrl = 'http://localhost:3000/tasks-list';
-        this.taskListUrl = '/tasks-list';
+        this.environmentService = environmentService;
+        this.taskListUrl = this.environmentService.apiUrl;
     }
     /**
      * API service method to get the all tasks of given tasklist id
@@ -527,7 +565,8 @@ let TaskService = class TaskService {
     }
 };
 TaskService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] },
+    { type: src_app_services_environment_service__WEBPACK_IMPORTED_MODULE_3__["EnvironmentService"] }
 ];
 TaskService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])()
@@ -866,8 +905,10 @@ __webpack_require__.r(__webpack_exports__);
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+const apiUrl = 'http://localhost:3000/tasks-list';
 const environment = {
-    production: false
+    apiUrl,
+    production: true,
 };
 /*
  * For easier debugging in development mode, you can import the following file
