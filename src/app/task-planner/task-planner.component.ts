@@ -42,7 +42,7 @@ export class TaskPlannerComponent implements OnInit {
     });
 
     dialogObj.componentInstance.title = 'Add new task list';
-    dialogObj.componentInstance.submit.subscribe((listName: string) => {
+    dialogObj.componentInstance.save.subscribe((listName: string) => {
       this.taskListService
         .post({ name: listName })
         .subscribe((taskLists: ITaskList[]) => {

@@ -21,7 +21,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class InputDialogComponent {
   @Input() public title: string;
-  @Output() public submit: EventEmitter<any> = new EventEmitter();
+  @Output() public save: EventEmitter<any> = new EventEmitter();
 
   public input = new FormControl('', [
     Validators.required,
@@ -38,7 +38,7 @@ export class InputDialogComponent {
    * Method to create the taskList or task
    */
   public create() {
-    this.submit.emit(this.input.value);
+    this.save.emit(this.input.value);
     this.activeModal.close();
   }
 }

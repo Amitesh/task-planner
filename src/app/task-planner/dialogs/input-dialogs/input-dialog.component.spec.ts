@@ -60,12 +60,12 @@ describe('InputDialogComponent', () => {
   });
 
   it('should listen for form changes', () => {
-    spyOn(component.submit, 'emit');
+    spyOn(component.save, 'emit');
     fixture.detectChanges();
 
     component.input.setValue('My task');
     component.create();
     expect(component.input.valid).toBeTruthy();
-    expect(component.submit.emit).toHaveBeenCalled();
+    expect(component.save.emit).toHaveBeenCalled();
   });
 });

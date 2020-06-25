@@ -34,7 +34,7 @@ class MockDialogService {
             cb.call(null, true);
           },
         },
-        submit: {
+        save: {
           subscribe: (cb) => {
             cb.call(null, 'Task1111');
           },
@@ -80,6 +80,7 @@ describe('TaskPlannerComponent', () => {
             'should return expected task lists',
           ),
         fail);
+        expect(component.taskLists.length).toEqual(0);
   });
 });
 

@@ -39,7 +39,7 @@ class MockDialogService {
             cb.call(null, true);
           },
         },
-        submit: {
+        save: {
           subscribe: (cb) => {
             cb.call(null, 'Task1111');
           },

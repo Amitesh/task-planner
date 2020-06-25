@@ -22,12 +22,12 @@ export class TaskListComponent implements OnInit {
   @Input() public taskList: ITaskList;
   @Output() public errorOnMove = new EventEmitter<IMoveEvent>();
 
-  private tasks: ITask[];
+  public tasks: ITask[];
 
   /**
    * Set Sortablejs configuration for group name and callbacks
    */
-  private sortableOptions: Options = {
+  public sortableOptions: Options = {
     group: 'task-planner-group',
     onAdd: (event: any) => {
       this.onAddTaskByDragAndDrop(event);
@@ -118,7 +118,7 @@ export class TaskListComponent implements OnInit {
       backdrop: 'static',
     });
     dialogObj.componentInstance.title = 'Add new task';
-    dialogObj.componentInstance.submit.subscribe((taskName: string) => {
+    dialogObj.componentInstance.save.subscribe((taskName: string) => {
       try {
         this.taskService
           .post(this.taskList._id, { name: taskName })
