@@ -19,7 +19,7 @@ const httpOptions = {
 @Injectable()
 export class TaskListService {
   // TaskList resource api end point. It can be put in a constant config file.
-  public taskListUrl;
+  public taskListUrl: string;
 
   constructor(
     private http: HttpClient,

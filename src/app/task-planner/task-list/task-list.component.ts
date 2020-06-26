@@ -92,7 +92,6 @@ export class TaskListComponent implements OnInit {
         .delete(fromTaskListId, { _id: taskId, name: null })
         .subscribe((taskList: ITaskList) => { },
           (err) => {
-            // let task = <ITask>JSON.parse(event.item.getAttribute('data-task'));
             this.errorOnMove.emit({
               fromTaskListId,
               newIndex: event.newIndex,
@@ -104,10 +103,6 @@ export class TaskListComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  public taskStringfy(task: ITask) {
-    return JSON.stringify(task);
   }
 
   /**

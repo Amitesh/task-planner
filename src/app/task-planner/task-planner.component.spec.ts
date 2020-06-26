@@ -80,7 +80,7 @@ describe('TaskPlannerComponent', () => {
             'should return expected task lists',
           ),
         fail);
-        expect(component.taskLists.length).toEqual(0);
+    expect(component.taskLists.length).toEqual(0);
   });
 });
 

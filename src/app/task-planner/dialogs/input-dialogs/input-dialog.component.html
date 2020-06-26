@@ -4,7 +4,7 @@
   </div>
   <div class="modal-body">
     <p>Name</p>
-    <input id="name-input" [formControl]="input" type="text" (keydown.enter)="input.valid && create()">
+    <input id="name-input" [formControl]="input" type="text" (keydown.enter)="input.valid && create()">  <span class="small">(* required)</span>
     <p class="small" [class.text-danger]="input.invalid && input.dirty" *ngIf="input.invalid && input.dirty">Input can't
       be blank.</p>
   </div>
