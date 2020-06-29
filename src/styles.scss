@@ -2,6 +2,11 @@
 @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
 @import "https://use.fontawesome.com/releases/v5.6.3/css/all.css";
 
+/* Import themes */
+@import "assets/css/themes/default.scss";
+@import "assets/css/themes/light.scss";
+@import "assets/css/themes/dark.scss";
+
 /* Application wide styles */
 .clearfix:after {
   content: ".";
@@ -10,8 +15,9 @@
   height: 0;
   clear: both;
 }
+
 body{
-  background-image: url(assets/images/wood.png);
+  background-image: var(--background-texture-image);
   background-repeat: repeat;
   background-position: center;
 }

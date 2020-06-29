@@ -1,0 +1,6 @@
+<div class="theme-switcher">
+    Change theme
+    <select class="choose-theme" (change)="changeTheme($event)">
+        <option *ngFor="let theme of themes" [value]="theme" [selected]="activeTheme === theme">{{theme}}</option>
+    </select>
+</div>
