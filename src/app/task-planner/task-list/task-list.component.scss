@@ -6,6 +6,9 @@ $color_nobel: #b7b7b7;
 $color_gallery: #eee;
 $alabaster: #fafafa;
 
+$add_task_btn_color: var(--add-task-btn-color);
+$add_task_btn_color_hover: var(--add-task-btn-color-hover);
+
 .task {
   border: 1px solid $alabaster;
   margin: 2px;
@@ -23,6 +26,7 @@ $alabaster: #fafafa;
     vertical-align: middle;
     line-height: 30px;
     color: $color_nobel;
+    padding-left: 5px;
   }
   &:hover{
     background-color: #dedddd;
@@ -64,5 +68,13 @@ $alabaster: #fafafa;
 
   &:hover .delete-icon {
     display: block;
+  }
+}
+
+a.add-task-btn{
+  color: $add_task_btn_color;
+  
+  &:hover{
+    color: $add_task_btn_color_hover;
   }
 }

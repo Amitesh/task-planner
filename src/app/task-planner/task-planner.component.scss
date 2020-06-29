@@ -4,10 +4,18 @@ $white: #fff;
 $black_29: rgba(0, 0, 0, 0.29);
 $color_silver: #c3c3c3;
 $color_sunset_orange: #f95454;
-$color_catskill_white: #e5eff5;
+// $color_catskill_white: #e5eff5; // list background color
 $color_venice_blue_approx: #0b568b;
+
+// Theme styles
+$logo_text_color: var(--logo-text-color);
+$logo_background_color: var(--logo-background-color);
+$add_list_btn_color: var(--add-list-btn-color);
 $list_name_color: var(--list-name-color);
-// #212529;
+$list_background_color: var(--list-background-color);
+$hints_background_color: var(--hints-background-color);
+$hints_text_color: var(--hints-text-color);
+
 
 .task-planner {
   margin: 10px 0 30px 0;
@@ -28,9 +36,9 @@ $list_name_color: var(--list-name-color);
       font-size: 1.25rem;
       letter-spacing: 1px;
       margin: 0;
-      background: $color_venice_blue_approx;
+      background: $logo_background_color;
       border-radius: 6px;
-      color: $white;
+      color: $logo_text_color;
       padding: 9px 15px;
     }
   }
@@ -45,7 +53,7 @@ $list_name_color: var(--list-name-color);
       overflow: auto;
 
       .list {
-        background-color: $color_catskill_white;
+        background-color: $list_background_color;
         border-radius: 6px;
         box-shadow: 1px 3px 5px 0px $black_29;
         padding: 8px;
@@ -86,7 +94,7 @@ $list_name_color: var(--list-name-color);
 
 a.add-list {
   margin-top: 6px;
-  color: $white;
+  color: $add_list_btn_color;
   margin-left: 32px;
 }
 
@@ -100,12 +108,13 @@ a.add-list {
 }
 
 .hints{
-  background-color: #0c0c0c3b;
+  background-color: $hints_background_color;
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
   margin-top: 15%;
   h6, li{
     font-size: 0.8rem;
+    color: $hints_text_color;
   }
 }

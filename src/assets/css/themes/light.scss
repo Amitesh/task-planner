@@ -1,4 +1,25 @@
 .light-theme {
+  // page background
   --background-texture-image: url("assets/images/light-texture.png");
-  --list-name-color: rgb(139, 139, 139);
+  
+  // Logo style
+  --logo-background-color: #0b568b;
+  --logo-text-color: #fff;
+
+  // Add list btn
+  --add-list-btn-color: #885d5d;
+
+  // List styles
+  --list-name-color:#e06868;
+  --list-background-color: #ffffff;
+
+  // Add task btn
+  --add-task-btn-color: #e68cb4;
+  --add-task-btn-color-hover: #f5599e;
+
+  // Hints
+  --hints-background-color: #f7d73c3b;
+  --hints-text-color: #212529;
+
+  --theme-text-color: #444;
 }
