@@ -1,17 +1,23 @@
 $theme_text_color: var(--theme-text-color);
 
-.theme-switcher{
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
-.choose-theme{
-    display: inline-block;
-    width: auto;
-    margin-left: 10px;
+.choose-theme {
+  display: inline-block;
+  width: auto;
+  margin-left: 10px;
 }
-.text-color{
-    color: $theme_text_color;
-    font-size: 0.9rem;
+.text-color {
+  color: $theme_text_color;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .theme-switcher {
+    top: 0;
+  }
 }

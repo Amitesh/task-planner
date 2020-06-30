@@ -16,7 +16,6 @@ $list_background_color: var(--list-background-color);
 $hints_background_color: var(--hints-background-color);
 $hints_text_color: var(--hints-text-color);
 
-
 .task-planner {
   margin: 10px 0 30px 0;
   border-radius: 16px;
@@ -35,7 +34,7 @@ $hints_text_color: var(--hints-text-color);
       display: inline-block;
       font-size: 1.25rem;
       letter-spacing: 1px;
-      margin: 0;
+      margin: 0 0 0 5px;
       background: $logo_background_color;
       border-radius: 6px;
       color: $logo_text_color;
@@ -49,8 +48,8 @@ $hints_text_color: var(--hints-text-color);
     .lists {
       margin: 0 10px 5px 0;
       display: flex;
-      flex-direction: row;
-      overflow: auto;
+      flex-direction: initial;
+      flex-wrap: wrap;
 
       .list {
         background-color: $list_background_color;
@@ -62,10 +61,6 @@ $hints_text_color: var(--hints-text-color);
         width: 25%;
         min-width: 200px;
         max-width: 300px;
-
-        &:first-child {
-          margin-left: 0px;
-        }
 
         h5 {
           color: $list_name_color;
@@ -98,22 +93,23 @@ a.add-list {
   margin-left: 32px;
 }
 
-.lists .empty-tasklist{
+.lists .empty-tasklist {
   display: none;
   margin: 20px 0px;
 }
 
-.lists.empty .empty-tasklist{
+.lists.empty .empty-tasklist {
   display: block;
 }
 
-.hints{
+.hints {
   background-color: $hints_background_color;
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
-  margin-top: 15%;
-  h6, li{
+  margin-top: 10vh;
+  h6,
+  li {
     font-size: 0.8rem;
     color: $hints_text_color;
   }

@@ -64,10 +64,19 @@ $add_task_btn_color_hover: var(--add-task-btn-color-hover);
     &:hover {
       color: $color_royal_blue;
     }
+    &:focus{
+      display: block;
+    }
   }
 
   &:hover .delete-icon {
     display: block;
+  }
+
+  .card-content:focus-within {
+    .delete-icon {
+      display: block;
+    }
   }
 }
 
