@@ -74,4 +74,15 @@ export class TaskPlannerComponent implements OnInit {
   public errorOnMove(event) {
     this.taskListService.move(this.taskLists, event);
   }
+
+  public updateTaskListName(name: string, task: ITask) {
+    console.log('in updateTaskListName =>', name, task);
+    const taskListToUpdate = Object.assign({}, task);
+    taskListToUpdate.name = name;
+    this.taskListService
+        .put(taskListToUpdate)
+        .subscribe((taskLists: ITaskList[]) => {
+          this.taskLists = taskLists;
+        });
+  }
 }

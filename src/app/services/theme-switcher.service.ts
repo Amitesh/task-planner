@@ -14,6 +14,7 @@ export class ThemeSwitherService {
     }
 
     public getThemes(): Array<string> {
+        // It can come from some configuration
         return ['default-theme', 'light-theme', 'dark-theme'];
     }
 

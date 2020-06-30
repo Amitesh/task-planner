@@ -1,0 +1,17 @@
+<span tabindex="0" *ngIf="!editMode" (click)="editMode = true" (keydown.enter)="editMode = true">
+  <ng-content></ng-content>
+</span>
+<input
+  *ngIf="editMode"
+  [formControl]="input"
+  (focusout)="onFocusOut()"
+  class="cellInput"
+  autofocus
+  type="text"
+  (focusout)="editMode = false"
+  (keydown.enter)="input.valid && editMode=false"
+/>
+
+<p class="error-hint" [class.red]="input.invalid" *ngIf="input.dirty && input.invalid && editMode">
+  Input can't be blank.
+</p>

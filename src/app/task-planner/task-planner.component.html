@@ -8,9 +8,11 @@
     <div class="lists" [class.empty]="taskLists.length === 0">
       <div class="list" *ngFor="let tasklist of taskLists">
         <div class="clearfix">
-          <span tabindex="0" [attr.aria-label]="tasklist.name">
+          <span [attr.aria-label]="tasklist.name">
             <h5 class="truncate" title="{{ tasklist.name }}">
-              {{ tasklist.name }}
+              <editable [data]='tasklist.name' (focusOut)='updateTaskListName($event, tasklist)'>
+                {{ tasklist.name }}
+              </editable>
             </h5>
           </span>
           <a href="#" class="delete-icon" (click)="deleteTaskList(tasklist)">

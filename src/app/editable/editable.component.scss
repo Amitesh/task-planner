@@ -1,0 +1,30 @@
+$lightGray: #c8c8c8;
+
+.cell {
+  border: 2px solid transparent;
+  // padding: 11px 20px;
+  width: auto;
+  // height: 100%;
+
+  &:hover {
+    cursor: pointer;
+    border: 2px dashed $lightGray;
+  }
+}
+
+.cellInput {
+     border: 2px solid transparent;
+    /* padding: 11px 20px; */
+    width: 70%;
+    height: auto;
+    display: inline-block;
+}
+
+.red{
+    color: red;
+}
+.error-hint{
+    font-size: 0.8rem;
+    text-transform: initial;
+    font-weight: normal;
+}

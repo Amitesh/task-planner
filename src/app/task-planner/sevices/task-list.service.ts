@@ -48,7 +48,7 @@ export class TaskListService {
    * @param taskList : TaskList object
    */
   public put(taskList: ITaskList): Observable<ITaskList[]> {
-    return this.http.put<ITaskList[]>(this.taskListUrl, taskList, httpOptions);
+    return this.http.put<ITaskList[]>(`${this.taskListUrl}/${taskList._id}`, taskList, httpOptions);
   }
 
   /**

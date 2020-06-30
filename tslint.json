@@ -26,7 +26,7 @@
       true,
       "element",
       "",
-      "kebab-case"
+      ""
     ],
     "eofline": true,
     "import-blacklist": [

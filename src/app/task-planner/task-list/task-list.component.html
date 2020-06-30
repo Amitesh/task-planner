@@ -2,7 +2,11 @@
   <div class="sortable" [attr.data-id]="taskList._id" [class.empty]="tasks.length === 0" [sortablejs]="tasks" [sortablejsOptions]="sortableOptions">
     <div class="card" *ngFor="let task of tasks" [attr.data-id]="task._id">
       <div tabindex="0" [attr.aria-label]="task.name" class="card-content">
-        <span class="truncate" title="{{ task.name }}">{{ task.name }}</span>
+        <span class="truncate" title="{{ task.name }}">
+          <editable [data]='task.name' (focusOut)='updateTaskName($event, task)'>
+            {{ task.name }}
+          </editable>
+        </span>
         <span class="clearfix"><a href="#" class="task-delete delete-icon" (click)="onDelete(task)"><i
               class="fas fa-trash"></i></a></span>
       </div>

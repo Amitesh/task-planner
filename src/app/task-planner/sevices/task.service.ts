@@ -54,6 +54,7 @@ export class TaskService {
    * @param task  : ITask
    */
   public put(taskListId: string, task: ITask): Observable<ITaskList> {
+    console.log('in put ', task);
     return this.http.put<ITaskList>(
       `${this.taskListUrl}\/${taskListId}\/tasks\/${task._id}`,
       task,

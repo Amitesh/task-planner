@@ -9,6 +9,8 @@ import { InputDialogComponent } from './dialogs/input-dialogs/input-dialog.compo
 import { TaskListService } from './sevices/task-list.service';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskPlannerComponent } from './task-planner.component';
+import { EditableComponent } from '../editable/editable.component';
+import { AutofocusDirective } from '../editable/autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { TaskPlannerComponent } from './task-planner.component';
     TaskListComponent,
     InputDialogComponent,
     ConfirmDialogComponent,
+    EditableComponent,
+    AutofocusDirective,
   ],
   exports: [TaskPlannerComponent, TaskListComponent],
   imports: [CommonModule, ReactiveFormsModule, NgbModule, SortablejsModule],

@@ -151,4 +151,15 @@ export class TaskListComponent implements OnInit {
       }
     });
   }
+
+  updateTaskName(name: string, task: ITask){
+    const taskToUpdate = Object.assign({}, task);
+    taskToUpdate.name = name;
+    this.taskService
+            .put(this.taskList._id, taskToUpdate)
+            .subscribe((taskList: ITaskList) => {
+              this.taskList = taskList;
+              this.tasks = this.taskList.tasks;
+            });
+  }
 }
