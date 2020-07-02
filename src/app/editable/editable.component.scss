@@ -1,30 +1,32 @@
 $lightGray: #c8c8c8;
 
-.cell {
-  border: 2px solid transparent;
-  // padding: 11px 20px;
-  width: auto;
-  // height: 100%;
+span:hover {
+  background-image: url("../../assets/images/pencil.svg");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: 20%;
+  padding-right: 15px;
+  cursor: text;
+}
 
-  &:hover {
-    cursor: pointer;
-    border: 2px dashed $lightGray;
+.cell-input {
+  border: 2px solid $lightGray;
+  width: 70%;
+  height: auto;
+  display: inline-block;
+
+  &:focus {
+    border: 2px solid $lightGray;
+    outline: 2px solid $lightGray;
   }
 }
 
-.cellInput {
-     border: 2px solid transparent;
-    /* padding: 11px 20px; */
-    width: 70%;
-    height: auto;
-    display: inline-block;
+.red {
+  color: red;
 }
 
-.red{
-    color: red;
-}
-.error-hint{
-    font-size: 0.8rem;
-    text-transform: initial;
-    font-weight: normal;
+.error-hint {
+  font-size: 0.8rem;
+  text-transform: initial;
+  font-weight: normal;
 }

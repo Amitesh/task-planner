@@ -80,9 +80,9 @@ export class TaskPlannerComponent implements OnInit {
     const taskListToUpdate = Object.assign({}, task);
     taskListToUpdate.name = name;
     this.taskListService
-        .put(taskListToUpdate)
-        .subscribe((taskLists: ITaskList[]) => {
-          this.taskLists = taskLists;
-        });
+      .put(taskListToUpdate)
+      .subscribe((taskLists: ITaskList[]) => {
+        this.taskLists = taskLists;
+      });
   }
 }

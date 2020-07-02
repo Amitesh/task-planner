@@ -4,7 +4,7 @@
     <a href="#" id="tasklist-add-button" class="add-list" (click)="addList()">Add List</a>
   </div>
 
-  <div class="task-board clearfix">
+  <div class="task-board clearfix" sameHeight="tasks-pan">
     <div class="lists" [class.empty]="taskLists.length === 0">
       <div class="list" *ngFor="let tasklist of taskLists">
         <div class="clearfix">

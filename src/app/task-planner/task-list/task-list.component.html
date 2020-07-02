@@ -1,5 +1,5 @@
-<div class="tasks">
-  <div class="sortable" [attr.data-id]="taskList._id" [class.empty]="tasks.length === 0" [sortablejs]="tasks" [sortablejsOptions]="sortableOptions">
+<div class="tasks" >
+  <div class="sortable tasks-pan"  [attr.data-id]="taskList._id" [class.empty]="tasks.length === 0" [sortablejs]="tasks" [sortablejsOptions]="sortableOptions">
     <div class="card" *ngFor="let task of tasks" [attr.data-id]="task._id">
       <div tabindex="0" [attr.aria-label]="task.name" class="card-content">
         <span class="truncate" title="{{ task.name }}">

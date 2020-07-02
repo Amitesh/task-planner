@@ -18,10 +18,10 @@ $add_task_btn_color_hover: var(--add-task-btn-color-hover);
   background: $color_gallery;
   border-radius: 0.25rem;
   min-height: 40px;
-  // border: 2px dashed transparent;
+  border: 2px dashed transparent;
 
   &.empty::after {
-    content: "Add or drop task here";
+    // content: "Add or drop task here";
     text-align: center;
     vertical-align: middle;
     line-height: 30px;
@@ -29,8 +29,8 @@ $add_task_btn_color_hover: var(--add-task-btn-color-hover);
     padding-left: 5px;
   }
   &:hover{
-    background-color: #dedddd;
-    // border: 2px dashed #ffbd44;
+    // background-color: #dedddd;
+    border: 2px dashed #bdbdbd;
   }
 }
 

@@ -11,6 +11,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskPlannerComponent } from './task-planner.component';
 import { EditableComponent } from '../editable/editable.component';
 import { AutofocusDirective } from '../editable/autofocus.directive';
+import { SameHeightSelectorDirective } from '../directives/same-height.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AutofocusDirective } from '../editable/autofocus.directive';
     ConfirmDialogComponent,
     EditableComponent,
     AutofocusDirective,
+    SameHeightSelectorDirective,
   ],
   exports: [TaskPlannerComponent, TaskListComponent],
   imports: [CommonModule, ReactiveFormsModule, NgbModule, SortablejsModule],
