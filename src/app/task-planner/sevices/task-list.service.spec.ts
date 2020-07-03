@@ -184,7 +184,7 @@ describe('TaskListService', () => {
         expect(data).toEqual([newTaskList], 'should return the task list');
       }, fail);
 
-      const req = httpTestingController.expectOne(taskListService.taskListUrl);
+      const req = httpTestingController.expectOne(`${taskListService.taskListUrl}\/${newTaskList._id}`);
       expect(req.request.method).toEqual('PUT');
       expect(req.request.body).toEqual(newTaskList);
 
@@ -213,7 +213,7 @@ describe('TaskListService', () => {
         },
       );
 
-      const req = httpTestingController.expectOne(taskListService.taskListUrl);
+      const req = httpTestingController.expectOne(`${taskListService.taskListUrl}\/${newTaskList._id}`);
 
       // respond with a 404 and the error message in the body
       const msg = 'deliberate 404 error';
